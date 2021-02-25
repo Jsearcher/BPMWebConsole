@@ -1,0 +1,140 @@
+﻿.setting_container {
+    color: #fff;
+    font-size: 16px;
+    background-color: #242832;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+    .setting_container .main_row {
+        /*height: 50px;*/
+        overflow: inherit;
+    }
+
+        .setting_container .main_row .query_form {
+            float: left;
+        }
+
+        .setting_container .main_row .condition_area,
+        .setting_container .main_row .condition_area div {
+            float: left;
+            line-height: 50px;
+        }
+
+            .setting_container .main_row .condition_area div {
+                margin-left: 15px;
+            }
+
+            .setting_container .main_row .condition_area input,
+            .setting_container .main_row .condition_area select {
+                height: 20px;
+                margin: 7px 0px 0px 5px;
+                border-radius: 4px;
+            }
+
+            .setting_container .main_row .condition_area .calendar_date {
+                margin-left: 10px;
+            }
+
+                .setting_container .main_row .condition_area .calendar_date input {
+                    width: 150px;
+                }
+
+        .setting_container .main_row .submit_area {
+            margin: 0px 15px 0px 0px;
+            float: right;
+        }
+
+            .setting_container .main_row .submit_area .search {
+                background-color: rgba(100, 183, 51, 0.7);
+                margin: 13px 5px 5px 15px;
+            }
+
+                .setting_container .main_row .submit_area .search:hover {
+                    background-color: #76aa41;
+                }
+
+            .setting_container .main_row .submit_area .delete {
+                background-color: rgba(192, 50, 83, 0.7);
+            }
+
+            .setting_container .main_row .submit_area .import,
+            .setting_container .main_row .submit_area .export {
+                background-color: rgba(19, 118, 187, 0.7);
+            }
+
+            .setting_container .main_row .submit_area .save,
+            .setting_container .main_row .submit_area .print {
+                background-color: rgba(100, 183, 51, 0.7);
+            }
+
+            .setting_container .main_row .submit_area .insert,
+            .setting_container .main_row .submit_area .update,
+            .setting_container .main_row .submit_area .reload {
+                background-color: rgba(250, 162, 27, 0.7);
+            }
+
+            .setting_container .main_row .submit_area .delete:hover {
+                background-color: rgba(192, 50, 83, 1);
+            }
+
+            .setting_container .main_row .submit_area .import:hover,
+            .setting_container .main_row .submit_area .export:hover {
+                background-color: rgba(19, 118, 187, 1);
+            }
+
+            .setting_container .main_row .submit_area .save:hover,
+            .setting_container .main_row .submit_area .print:hover {
+                background-color: rgba(100, 183, 51, 1);
+            }
+
+            .setting_container .main_row .submit_area .insert:hover,
+            .setting_container .main_row .submit_area .update:hover,
+            .setting_container .main_row .submit_area .reload:hover {
+                background-color: rgba(250, 162, 27, 1);
+            }
+
+@media screen and (max-width: 1600px) {
+    .setting_container {
+        color: #fff;
+    }
+
+        .setting_container .main_row .condition_area div {
+            margin-left: 5px;
+            font-size: 14px;
+        }
+}
+
+@media screen and (max-width: 1400px) {
+    .setting_container .main_row {
+        /*height: 40px;*/
+    }
+
+        .setting_container .main_row .condition_area,
+        .setting_container .main_row .condition_area div {
+            line-height: 40px;
+            font-size: 14px;
+        }
+
+            .setting_container .main_row .condition_area .calendar_date {
+                margin-left: 5px;
+            }
+
+                .setting_container .main_row .condition_area .calendar_date input {
+                    width: 140px;
+                }
+
+            .setting_container .main_row .condition_area span {
+                line-height: 40px;
+            }
+
+        .setting_container .main_row .submit_area {
+            margin: 0px 5px 0px 0px;
+        }
+
+            .setting_container .main_row .submit_area .button {
+                font-size: 12px;
+                width: 50px;
+                margin: 7px 0px 5px 3px;
+            }
+}

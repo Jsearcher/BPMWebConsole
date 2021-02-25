@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/css/_Table.css" />
+    <link rel="stylesheet" href="~/css/Dashboard.css" />
+}
+
+@section scripts {
+    <script src="~/js/Dashboard.js"></script>
+}
+
+@section graphics {
+    <div class="graphic_area">
+        <div class="legend">
+            <div class="icon" style="background-color: #64b733"></div>
+            <div class="label">狀態正常</div>
+        </div>
+        <div class="legend">
+            <div class="icon" style="background-color: #c03253"></div>
+            <div class="label">狀態異常</div>
+        </div>
+    </div>
+}
+
+<div class="sub_area_left">
+    <div class="status_container" id="bpm_status"></div>
+    <div class="status_container" id="airline_status"></div>
+    <div class="status_container" id="brs_status"></div>
+</div>
+<div class="sub_area_right">
+
+</div>

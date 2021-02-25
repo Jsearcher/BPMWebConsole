@@ -1,0 +1,85 @@
+﻿@{
+    ViewData["Title"] = "Statistics";
+}
+
+@model BPMWebConsole.Models.TagHelper.ViewModels.StatisticsViewModel
+
+@section styles {
+    <link rel="stylesheet" href="~/css/_SettingControl.css" />
+    <link rel="stylesheet" href="~/css/_Table.css" />
+    <link rel="stylesheet" href="~/css/Statistics.css" />
+}
+
+@section scripts {
+    <script src="~/js/Statistics.js"></script>
+}
+
+@Html.HiddenFor(x => x.FormsModel.QueryStatus)
+
+<div class="setting_container">
+    <div class="main_row">
+        <form class="query_form" method="post">
+            <div class="condition_area">
+                <div class="calendar_date">
+                    <span>選擇日期 起</span>
+                    <input type="date" id="date_start" asp-for="FormsModel.DateStart" />
+                    <span>迄 </span>
+                    <input type="date" id="date_end" asp-for="FormsModel.DateEnd" />
+                </div>
+                <div class="list_airline">
+                    <span>航空公司 </span>
+                    <select id="airlines" asp-for="FormsModel.Airline" asp-items="Model.FormsModel.Airlines"></select>
+                </div>
+            </div>
+            <div class="submit_area">
+                <button class="button search" id="search_btn" type="submit" asp-controller="Statistics" asp-action="QueryBPMResult">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </form>
+        <div class="result_control" id="result_control">
+            <div class="graphic_disp">
+                <input type="checkbox" id="graphic_disp_chk" name="graphics" value="Y" checked="checked" />
+                <span>圖表</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="result_container">
+    <div class="table_container">
+        <div class="grid_area">
+            @if (Model.TableModel != null)
+            {
+                <div class="table_setting">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>日期</th>
+                                <th>航空公司</th>
+                                <th>數量</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (BPMWebConsole.Models.Source.BPMProcCount item in Model.TableModel)
+                            {
+                                <tr>
+                                    <td>@item.ProcDate</td>
+                                    <td>
+                                        <img src="~/image/airline/GIF/@(item.Airline.IATA_Code + ".gif")" alt="Airline Brand of @(item.Airline.IATA_Code)" />
+                                        @item.Airline.Remark
+                                    </td>
+                                    <td>@item.Count</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="graphic_container">
+        <div class="bar_chart_area">
+
+        </div>
+    </div>
+</div>

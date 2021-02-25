@@ -1,0 +1,92 @@
+﻿.setting_container .main_row .submit_area {
+    margin: 0px 15px 0px 15px;
+    float: left;
+}
+
+.setting_container .main_row .result_control {
+    float: left;
+}
+
+    .setting_container .main_row .result_control .graphic_disp {
+        margin-left: 15px;
+        line-height: 50px;
+    }
+
+.result_container {
+    /*margin-top: 5vh;*/
+    overflow: hidden;
+    outline: 1px solid #ff0000;
+}
+
+    .result_container .table_container {
+        float: left;
+        width: 40%;
+        outline: 1px solid #00ff00;
+    }
+
+        .result_container .table_container .grid_area .table_setting {
+            width: 90%;
+        }
+
+            .result_container .table_container .grid_area .table_setting table {
+                background-color: #fff;
+                border-collapse: separate;
+            }
+
+                    .result_container .table_container .grid_area .table_setting table tbody tr td:nth-child(n) {
+                        width: 25%;
+                    }
+
+                    .result_container .table_container .grid_area .table_setting table tbody tr td:nth-child(2) {
+                        width: 50%;
+                        text-align: left;
+                        align-items: center;
+                    }
+
+                    .result_container .table_container .grid_area .table_setting table tbody tr td:nth-child(3) {
+                        text-align: right;
+                        padding-right: 5%;
+                    }
+
+                        .result_container .table_container .grid_area .table_setting table tbody tr td:nth-child(2) img {
+                            padding-left: 20%;
+                        }
+
+    .result_container .graphic_container {
+        float: left;
+        width: 60%;
+        height: 50px;
+        outline: 1px solid #0000ff;
+    }
+
+@media screen and (max-width: 1707px) {
+    .button {
+        width: 40px;
+        font-size: 13px;
+    }
+
+    .setting_container {
+        color: #fff;
+        font-size: 14px;
+    }
+
+        .setting_container .main_row .condition_area div {
+            margin-left: 5px;
+        }
+
+        .setting_container .main_row .condition_area input {
+            margin: 7px 0px 0px 2px;
+        }
+}
+
+@media screen and (max-width: 1400px) {
+    .setting_container .main_row .submit_area .button {
+        width: 35px;
+        font-size: 12px;
+    }
+
+    .setting_container .main_row .result_control .graphic_disp,
+    .setting_container .main_row .result_control .graphic_disp div {
+        line-height: 40px;
+    }
+}

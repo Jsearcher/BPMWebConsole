@@ -1,0 +1,14 @@
+10:57:00.125 ERROR - startIndex cannot be larger than length of string. (Parameter 'startIndex')    at System.String.Substring(Int32 startIndex, Int32 length)
+   at BPMWebConsole.Models.DAO.BPMLog.SelectByCostom(String pDate1, String pDate2, String pAirline) in D:\VS Code\Webs\BPMWebConsole\BPMWebConsole\Models\DAO\BPMLog.cs:line 266
+   at BPMWebConsole.Models.Service.StatisticsService.GetBPMProcCount(String dateStart, String dateEnd, String airline) in D:\VS Code\Webs\BPMWebConsole\BPMWebConsole\Models\Service\StatisticsService.cs:line 53
+
+11:02:46.242 ERROR - Index (zero based) must be greater than or equal to zero and less than the size of the argument list.    at System.Text.StringBuilder.AppendFormatHelper(IFormatProvider provider, String format, ParamsArray args)
+   at System.String.FormatHelper(IFormatProvider provider, String format, ParamsArray args)
+   at System.String.Format(String format, Object arg0)
+   at BPMWebConsole.Models.DAO.BPMLog.SelectByCostom(String pDate1, String pDate2, String pAirline) in D:\VS Code\Webs\BPMWebConsole\BPMWebConsole\Models\DAO\BPMLog.cs:line 293
+   at BPMWebConsole.Models.Service.StatisticsService.GetBPMProcCount(String dateStart, String dateEnd, String airline) in D:\VS Code\Webs\BPMWebConsole\BPMWebConsole\Models\Service\StatisticsService.cs:line 53
+
+11:07:47.038 ERROR - startIndex cannot be larger than length of string. (Parameter 'startIndex')    at System.String.Substring(Int32 startIndex, Int32 length)
+   at BPMWebConsole.Models.DAO.BPMLog.SelectByCostom(String pDate1, String pDate2, String pAirline) in D:\VS Code\Webs\BPMWebConsole\BPMWebConsole\Models\DAO\BPMLog.cs:line 293
+   at BPMWebConsole.Models.Service.StatisticsService.GetBPMProcCount(String dateStart, String dateEnd, String airline) in D:\VS Code\Webs\BPMWebConsole\BPMWebConsole\Models\Service\StatisticsService.cs:line 53
+

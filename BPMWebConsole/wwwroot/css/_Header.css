@@ -1,0 +1,116 @@
+﻿/* Header styles
+-------------------------------------------------- */
+header {
+    position: fixed;
+    height: 65px;
+    width: 100%;
+    min-width: 1024px;
+    background-color: #242832;
+    z-index: 100;
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 2px #000;
+}
+
+    header .header_left {
+        position: relative;
+        float: left;
+    }
+
+        header .header_left .airport_logo {
+            float: left;
+            width: 57px;
+            margin: 5px 10px 0 10px;
+        }
+
+            header .header_left .airport_logo img {
+                max-width: 100%;
+            }
+
+        header .header_left .system_name {
+            float: left;
+            font-weight: bold;
+            margin-top: 27px;
+            font-size: 20px;
+            letter-spacing: 1px;
+        }
+
+    header .header_right {
+        float: right;
+        height: 25px;
+        line-height: 32px;
+        margin: 25px 25px 0 0;
+    }
+
+        header .header_right > div {
+            padding: 0 10px;
+        }
+
+            header .header_right > div div {
+                padding: 0 10px;
+            }
+
+        header .header_right .time_disp {
+            float: left;
+        }
+
+            header .header_right .time_disp .date_count {
+                float: left;
+                font-size: 18px;
+            }
+
+            header .header_right .time_disp .time_count {
+                position: relative;
+                color: #95cb6e;
+                float: left;
+                font-weight: bold;
+                font-size: 25px;
+                line-height: 25px;
+                padding-right: 30px;
+                border-right: 1px solid #fff;
+            }
+
+        header .header_right .login_area {
+            float: left;
+            cursor: pointer;
+        }
+
+            header .header_right .login_area .login_name, header .header_right .login_area .logout {
+                position: relative;
+                max-width: 150px;
+                min-width: 80px;
+            }
+
+                header .header_right .login_area .login_name:hover, header .header_right .login_area .logout:hover {
+                    color: #faa21b;
+                }
+
+@media screen and (max-width: 1160px) {
+    header .header_left .system_name {
+        margin-top: 30px;
+        font-size: 18px;
+    }
+
+    header .header_right {
+        margin: 25px 15px 0 0;
+    }
+
+        header .header_right > div div {
+            padding: 0 5px;
+        }
+
+        header .header_right .time_disp {
+            margin: 0 10px 0 0;
+            letter-spacing: 0px;
+        }
+
+            header .header_right .time_disp .date_count {
+                font-size: 16px;
+            }
+
+            header .header_right .time_disp .time_count {
+                font-size: 22px;
+                padding-right: 20px;
+            }
+}

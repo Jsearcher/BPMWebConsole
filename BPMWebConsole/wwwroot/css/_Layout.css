@@ -1,0 +1,132 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: 'Microsoft JhengHei', Arial;
+}
+
+body {
+    background-color: #f1f1f2;
+}
+
+tbody::-webkit-scrollbar-track, div::-webkit-scrollbar-track {
+    background-color: #ccc;
+}
+
+tbody::-webkit-scrollbar, div::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+tbody::-webkit-scrollbar-thumb, div::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #343842;
+}
+
+.content {
+    padding-top: 65px;
+    position: relative;
+    height: 100vh;
+    float: left;
+    background-color: #f1f1f2;
+    box-sizing: border-box;
+    width: 87%;
+    min-width: 1024px;
+    min-height: 655px;
+}
+
+    .content .content_middle {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+        .content .content_middle .title_area {
+            position: relative;
+            margin: 30px 0px 5px 0px;
+            float: left;
+            width: 100%;
+            border-bottom: 3px solid #faa21b;
+        }
+
+            .content .content_middle .title_area .function_title {
+                position: relative;
+                font-size: 25px;
+                float: left;
+                font-weight: bold;
+            }
+
+                .content .content_middle .title_area .function_title span {
+                    font-size: 14px;
+                    margin-left: 10px;
+                }
+
+        .content .content_middle .function_area {
+            width: 100%;
+            clear: both;
+            background-color: #fff;
+            outline: 1px solid #666;
+        }
+
+footer {
+    position: fixed;
+    width: 100vw;
+    top: 95vh;
+    vertical-align: bottom;
+    margin: auto;
+    text-align: center;
+    font-size: 14px;
+}
+
+a {
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: none;
+    }
+
+i {
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.button {
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    transition: .2s;
+    height: 25px;
+    width: 50px;
+    margin: 13px 0 5px 4px;
+}
+
+span .required {
+    color: #f00;
+    font-size: 16px;
+    vertical-align: top;
+}
+
+@media screen and (max-width : 1400px) {
+    .content {
+        position: relative;
+        width: 100%;
+    }
+
+        .content .content_middle {
+            width: 92%;
+        }
+
+            .content .content_middle .function_title {
+                margin: 10px 10px 5px 0px;
+            }
+}
+
+@media screen and (max-width: 1417px) and (min-width: 1401px) {
+    body::-webkit-scrollbar {
+        display: none;
+    }
+}

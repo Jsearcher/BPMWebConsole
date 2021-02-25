@@ -1,0 +1,142 @@
+﻿/* Left Menu styles
+-------------------------------------------------- */
+.left_menu {
+    position: relative;
+    left: 0;
+    padding-top: 65px;
+    background-color: #242832;
+    width: 13%;
+    height: 100vh;
+    font-size: 16px;
+    float: left;
+    z-index: 1;
+    display: block;
+    border-right: 5px solid #242832;
+    box-shadow: 2px 0 3px #000;
+    box-sizing: border-box;
+}
+
+    .left_menu .menu_area {
+        position: relative;
+        padding: 10px 0 0 0;
+        display: block;
+    }
+
+        .left_menu .menu_area .tag_color {
+            margin-left: 5%;
+            width: 95%;
+            display: block;
+            color: #fff;
+            height: 40px;
+            border-radius: 10px;
+            background-color: #808284;
+            line-height: 40px;
+            font-size: 16px;
+        }
+
+        .left_menu .menu_area .active {
+            background-color: #c03253;
+        }
+
+        .left_menu .menu_area .tag_color .menu_name {
+            position: relative;
+            background-color: #58585b;
+            margin-left: 10px;
+            padding-left: 10px;
+            height: 100%;
+            border-radius: 0;
+        }
+
+        .left_menu .menu_area .tag_color a {
+            color: #fff;
+        }
+
+        .left_menu .menu_area .sub_list ul li:hover a {
+            color: #fa0;
+            transition: .2s;
+        }
+
+        .left_menu .menu_area .sub_list {
+            position: relative;
+            display: block;
+            margin-left: 20px;
+            padding: 5px 0;
+            color: #fff;
+        }
+
+            .left_menu .menu_area .sub_list ul li {
+                margin-left: 10px;
+                height: 25px;
+                display: none;
+            }
+
+                .left_menu .menu_area .sub_list ul li i {
+                    margin-right: 10px;
+                }
+
+            .left_menu .menu_area .sub_list ul .text_color {
+                color: #fa0;
+            }
+
+            .left_menu .menu_area .sub_list ul li:hover {
+                color: #fa0;
+                transition: .2s;
+                cursor: pointer;
+            }
+
+            .left_menu .menu_area .sub_list ul a {
+                color: #fff;
+            }
+
+        .left_menu .menu_area .tag_color .menu_name:hover {
+            background-color: #666;
+            color: #fa0;
+            transition: .2s;
+            cursor: pointer;
+        }
+
+    .left_menu .menu_bookmark {
+        position: absolute;
+        left: 100%;
+        top: 45%;
+        width: 15px;
+        height: 70px;
+        background-color: #242832;
+        line-height: 50px;
+        color: #fff;
+        cursor: pointer;
+        box-shadow: 2px 0 3px #000;
+        display: none;
+    }
+
+        .left_menu .menu_bookmark div {
+            transform: rotate(90deg);
+            font-size: 12px;
+            text-align: center;
+        }
+
+@media screen and (max-width: 1600px) {
+    .left_menu .menu_area .tag_color {
+        height: 35px;
+        line-height: 35px;
+    }
+
+    .left_menu .menu_area .sub_list {
+        padding: 5px 0;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .left_menu {
+        width: 200px;
+        position: fixed;
+        left: -195px;
+        z-index: 90;
+    }
+
+        .left_menu .menu_bookmark {
+            position: absolute;
+            left: 200px;
+            display: block;
+        }
+}

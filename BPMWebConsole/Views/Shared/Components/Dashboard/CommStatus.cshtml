@@ -1,0 +1,55 @@
+﻿@model List<BPMWebConsole.Models.Source.CommStatus>
+
+<div class="grid_area">
+    <div class="table_setting">
+        <div class="table_name">@ViewData["status_table_name"]</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>狀態</th>
+                    <th>@ViewData["status_column_name"]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (BPMWebConsole.Models.Source.CommStatus item in Model)
+                {
+                    <tr>
+                        @if (@item.Status ?? false)
+                        {
+                            <td class="status active">
+                                @if ((int)item.Type == 1)
+                                {
+                                    <i class="fa fa-cog"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa fa-link"></i>
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="status">
+                                @if ((int)item.Type == 1)
+                                {
+                                    <i class="fa fa-cog"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa fa-link"></i>
+                                }
+                            </td>
+                        }
+                        <td>
+                            @if ((int)item.Type == 2)
+                            {
+                                <img src="~/image/airline/GIF/@(item.Name_Code + ".gif")" alt="Airline Brand of @(item.Name_Code)" />
+                            }
+                            @item.Name_Desc
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

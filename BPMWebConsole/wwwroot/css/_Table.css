@@ -1,0 +1,87 @@
+﻿.grid_area {
+    clear: both;
+}
+
+.grid_area {
+    position: relative;
+    width: 100%;
+}
+
+    .grid_area .table_setting table {
+        table-layout: fixed;
+        border-spacing: 0px;
+        width: 100%;
+    }
+
+        .grid_area .table_setting table tr,
+        .grid_area .table_setting table tr td {
+            padding: 0px;
+        }
+
+        .grid_area .table_setting table thead {
+            display: table;
+            width: 100%;
+        }
+
+            .grid_area .table_setting table thead tr {
+                /*display: table;*/
+                height: 4vh;
+                line-height: 4vh;
+                min-height: 40px;
+                
+                background-color: #414141;
+                color: #fff;
+                font-size: 16px;
+                text-align: center;
+            }
+
+            .grid_area .table_setting table thead tr th {
+                position: sticky;
+                top: 0;
+            }
+
+        .grid_area .table_setting table tbody {
+            display: block;
+            overflow-y: auto;
+            overflow-x: hidden;
+            height: 65vh;
+            font-size: 14px;
+        }
+
+            .grid_area .table_setting table tbody tr {
+                display: table;
+                position: relative;
+                height: 4vh;
+                min-height: 40px;
+                background-color: #fff;
+                width: 100%;
+                cursor: pointer;
+            }
+
+                .grid_area .table_setting table tbody tr td {
+                    text-align: center;
+                    font-weight: bold;
+                }
+
+@media screen and (max-width: 1400px) {
+    .grid_area .table_setting table thead {
+        font-size: 14px;
+    }
+
+        .grid_area .table_setting table thead tr {
+            height: 5vh;
+            line-height: 5vh;
+        }
+
+    .grid_area .table_setting table tbody {
+        height: 55vh;
+    }
+        
+        .grid_area .table_setting table tbody tr {
+            height: 5vh;
+        }
+
+        .grid_area .table_setting table tbody tr td {
+            /*width: 90px;*/
+        }
+}

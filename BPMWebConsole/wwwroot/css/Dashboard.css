@@ -1,0 +1,111 @@
+﻿.content .content_middle {
+    min-width: 1200px;
+}
+
+    .content .content_middle .title_area .graphic_area {
+        position: relative;
+        margin: 19px 0px 0px 5px;
+        font-size: 16px;
+        float: right;
+    }
+
+        .content .content_middle .title_area .graphic_area .legend {
+            margin-left: 10px;
+            float: right;
+            display: flex;
+            align-items: center;
+        }
+
+            .content .content_middle .title_area .graphic_area .legend .icon {
+                margin: auto 5px;
+                border-radius: 50%;
+                float: left;
+                height: 16px;
+                width: 16px;
+            }
+
+            .content .content_middle .title_area .graphic_area .legend .label {
+                float: left;
+                font-size: 16px;
+            }
+
+    .content .content_middle .function_area {
+        margin-top: 5px;
+        float: left;
+    }
+
+        .content .content_middle .function_area .sub_area_left {
+            float: left;
+            width: 65%;
+            outline: 1px solid #00ff00;
+        }
+
+        .content .content_middle .function_area .sub_area_right {
+            float: right;
+            width: 30%;
+            outline: 1px solid #0000ff;
+        }
+
+        .content .content_middle .function_area .sub_area_left .status_container {
+            float: left;
+            width: 33%;
+            /*outline: 1px solid #ff0000;*/
+        }
+
+            .content .content_middle .function_area .sub_area_left .status_container .grid_area .table_setting {
+                margin: 0 auto;
+                padding: 20px 10px 20px 10px;
+                width: 90%;
+            }
+
+                .content .content_middle .function_area .sub_area_left .status_container .grid_area .table_setting .table_name {
+                    font-size: 20px;
+                    font-weight: bold;
+                    /*outline: 1px solid #f00;*/
+                }
+
+            .content .content_middle .function_area .sub_area_left .status_container .grid_area .table_setting table {
+                background-color: #fff;
+                border-collapse: separate;
+            }
+                    .content .content_middle .function_area .sub_area_left .status_container .grid_area .table_setting table thead {
+                        border-bottom: 3px solid #faa21b;
+                    }
+
+                .content .content_middle .function_area .sub_area_left .status_container .grid_area .table_setting table tbody {
+                    overflow-y: initial;
+                    overflow-x: initial;
+                }
+
+                    .content .content_middle .function_area .sub_area_left .status_container .grid_area .table_setting table tbody tr {
+                        color: #fff;
+                        border-spacing: 0px 3px;
+                    }
+
+                        .content .content_middle .function_area .sub_area_left .status_container .grid_area .table_setting table tbody tr td {
+                            background-color: #888;
+                        }
+
+                            .content .content_middle .function_area .sub_area_left .status_container .grid_area .table_setting table thead tr th:nth-child(1),
+                            .content .content_middle .function_area .sub_area_left .status_container .grid_area .table_setting table tbody tr td:nth-child(1) {
+                                width: 25%;
+                                text-align: center;
+                            }
+
+                            .content .content_middle .function_area .sub_area_left .status_container .grid_area .table_setting table thead tr th:nth-child(2),
+                            .content .content_middle .function_area .sub_area_left .status_container .grid_area .table_setting table tbody tr td:nth-child(2) {
+                                width: 75%;
+                                align-items: center;
+                                text-align: left;
+                                padding-left: 5%;
+                            }
+
+                        .content .content_middle .function_area .sub_area_left .status_container .grid_area .table_setting table tbody tr .status {
+                            color: #fff;
+                            background-color: #c03253;
+                            width: auto;
+                        }
+
+                        .content .content_middle .function_area .sub_area_left .status_container .grid_area .table_setting table tbody tr .active {
+                            background-color: #64b733;
+                        }
