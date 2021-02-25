@@ -1,0 +1,22 @@
+{
+  "name": "bpmwebconsole",
+  "version": "1.0.0",
+  "description": "This is an NPM packages for BPMWebConsole Project.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jsearcher/BPMWebConsole.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "BPM",
+    "BRS"
+  ],
+  "author": "KaiJyun Huang",
+  "license": "ISC",
+  "dependencies": {
+    "chart.js": "^2.9.4"
+  }
+}
