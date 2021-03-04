@@ -15,7 +15,7 @@ namespace BPMWebConsole.ViewComponents
         /// 注入 <c>CommStatus</c> 通訊連線狀態之資料取得服務
         /// </summary>
         /// <param name="type">通訊連線運作狀態種類</param>
-        /// <returns>通訊連線狀態參數清單</returns>
+        /// <returns>通訊連線狀態參數清單(View Component)</returns>
         public async Task<IViewComponentResult> InvokeAsync(StatusType type)
         {
             var statuses = await Task.FromResult(new CommStatusService().GetCommStatus(type));

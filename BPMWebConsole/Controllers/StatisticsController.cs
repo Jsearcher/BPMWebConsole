@@ -1,6 +1,6 @@
 ﻿using BPMWebConsole.Models.Service;
 using BPMWebConsole.Models.Source;
-using BPMWebConsole.Models.TagHelper.ViewModels;
+using BPMWebConsole.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

@@ -2,7 +2,7 @@
     ViewData["Title"] = "Statistics";
 }
 
-@model BPMWebConsole.Models.TagHelper.ViewModels.StatisticsViewModel
+@model                         BPMWebConsole.Models.ViewModels.StatisticsViewModel
 
 @section styles {
     <link rel="stylesheet" href="~/css/_SettingControl.css" />
@@ -79,7 +79,8 @@
     </div>
     <div class="graphic_container">
         <div class="bar_chart_area">
-
+            <vc:statistics counts="@Model.TableModel"></vc:statistics>
+            @*@await Component.InvokeAsync("Statistics", Model.TableModel)*@
         </div>
     </div>
 </div>

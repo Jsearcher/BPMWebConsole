@@ -73,4 +73,4 @@ D:\VS Code\Webs\BPMWebConsole\BPMWebConsole\obj\Debug\netcoreapp3.1\Razor\Views\
 D:\VS Code\Webs\BPMWebConsole\BPMWebConsole\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LeftMenu.cshtml.g.cs
 D:\VS Code\Webs\BPMWebConsole\BPMWebConsole\obj\Debug\netcoreapp3.1\Razor\Views\Statistics\Index.cshtml.g.cs
 D:\VS Code\Webs\BPMWebConsole\BPMWebConsole\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Dashboard\CommStatus.cshtml.g.cs
-D:\VS Code\Webs\BPMWebConsole\BPMWebConsole\obj\Debug\netcoreapp3.1\BPMWebConsole.csprojAssemblyReference.cache
+D:\VS Code\Webs\BPMWebConsole\BPMWebConsole\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Statistics\BPMProcCount.cshtml.g.cs
