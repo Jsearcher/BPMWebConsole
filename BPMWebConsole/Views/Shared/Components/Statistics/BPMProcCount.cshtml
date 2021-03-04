@@ -1,0 +1,113 @@
+﻿@{
+    string ChartLabels = Model != null ? JsonConvert.SerializeObject(Model.Select(x => x.Airline.IATA_Code).ToList()) : string.Empty;
+    string ChartValues = Model != null ? JsonConvert.SerializeObject(Model.Select(x => x.Count).ToList()) : string.Empty;
+}
+
+@model List<BPMWebConsole.Models.Source.BPMProcCount>
+
+<canvas id="bar_chart"></canvas>
+
+<script src="~/lib/node_modules/chart.js/dist/Chart.js"></script>
+<script>
+        $(document).ready(function () {
+            if (@Html.Raw(ChartLabels) != "" && @Html.Raw(ChartValues) != "") {
+                GetBarChart().Update(@Html.Raw(ChartLabels), @Html.Raw(ChartValues));
+            }
+        });
+
+        var GetBarChart = () => {
+            let ctx = $('#bar_chart');
+
+            let data = {
+                labels: [],
+                datasets: [{
+                    backgroundColor: gradient,
+                    borderWidth: 1,
+                    data: []
+                }]
+            }
+
+            let bar_chart = new Chart(ctx, {
+                type: "bar",
+                data: data,
+                options: {
+                    hover: { "animationDuration": 0 },
+                    animation: {
+                        onComplete: () => {
+                            let chartInstance = this.chart;
+                            let ctx = chartInstance.ctx;
+
+                            ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'bottom';
+                            this.data.datasets.forEach((dataset, i) => {
+                                let meta = chartInstance.controller.getDatasetMeta(i);
+                                meta.data.forEach((bar, index) => {
+                                    let thedata = dataset.data[index];
+                                    let x = bar._model.x;
+                                    let y = bar._model.y - 7;
+                                    let x_offset = [4, 9, 13, 20];
+                                    if (index == 0) {
+                                        ctx.fillText(FormatNumber(thedata), x + x_offset[thedata.length - 1], y);
+                                    }
+                                    else {
+                                        ctx.fillText(FormatNumber(thedata), x, y);
+                                    }
+                                });
+                            });
+                        }
+                    },
+                    scales: {
+                        yAxes: [{
+                            display: false,
+                            gridLines: { dispaly: false },
+                            ticks: {
+                                display: false,
+                                beginAtZero: false
+                            }
+                        }],
+                        xAxes: [{
+                            display: false,
+                            gridLines: { display: false },
+                            ticks: { beginAtZero: false }
+                        }]
+                    },
+                    title: { "display": true}
+                }
+            });
+
+            var Update = (labels, values) => {
+                let bg_color = Array(values.length).fill(GetBGColor(0));
+                for (let i = 0; i < values.length; i++) {
+                    bg_color[i] = GetBGColor((i + 1) % 6); // 6 colors
+                }
+                bar_chart.data.labels = labels;
+                bar_chart.data.datasets[0].data = values;
+                bar_chart.update();
+            };
+
+            return {
+                Chart: bar_chart,
+                Update: Update
+            }
+        };
+
+        let GetBGColor = (idx) => {
+            switch (idx) {
+                case 1:
+                    return "#ec7063";
+                case 2:
+                    return "#a569bd";
+                case 3:
+                    return "5dade2";
+                case 4:
+                    return "58d68d";
+                case 5:
+                    return "f4d03f";
+                case 6:
+                    return "566573";
+                default:
+                    return "0000ff";
+            }
+        };
+</script>
