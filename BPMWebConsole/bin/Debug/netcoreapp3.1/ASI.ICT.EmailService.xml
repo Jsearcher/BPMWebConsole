@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ASI.ICT.EmailService</name>
+    </assembly>
+    <members>
+        <member name="T:EmailService.EmailConfiguration">
+            <summary>
+            Email服務之組態設定類別
+            </summary>
+        </member>
+        <member name="P:EmailService.EmailConfiguration.From">
+            <summary>
+            寄件者Email位址
+            </summary>
+        </member>
+        <member name="P:EmailService.EmailConfiguration.SmtpServer">
+            <summary>
+            SMTP伺服器主機名稱
+            </summary>
+        </member>
+        <member name="P:EmailService.EmailConfiguration.Port">
+            <summary>
+            伺服器主機埠號(port)
+            </summary>
+        </member>
+        <member name="P:EmailService.EmailConfiguration.UserName">
+            <summary>
+            伺服器主機之使用者帳號
+            </summary>
+        </member>
+        <member name="P:EmailService.EmailConfiguration.Password">
+            <summary>
+            伺服器主機之使用者密碼
+            </summary>
+        </member>
+        <member name="T:EmailService.EmailSender">
+            <summary>
+            Email信件傳送器類別
+            </summary>
+        </member>
+        <member name="F:EmailService.EmailSender._emailConfig">
+            <summary>
+            Email服務組態設定物件
+            </summary>
+        </member>
+        <member name="M:EmailService.EmailSender.#ctor(EmailService.EmailConfiguration)">
+            <summary>
+            建構子
+            </summary>
+            <param name="emailConfig">Email服務組態設定物件</param>
+        </member>
+        <member name="M:EmailService.EmailSender.SendEmail(EmailService.Message)">
+            <summary>
+            傳送Email信件方法
+            </summary>
+            <param name="message">信件內容訊息物件</param>
+        </member>
+        <member name="M:EmailService.EmailSender.SendEmailAsync(EmailService.Message)">
+            <summary>
+            非同步方式傳送Email信件方法
+            </summary>
+            <param name="message">信件內容訊息物件</param>
+            <returns>非同步處理執行緒</returns>
+        </member>
+        <member name="M:EmailService.EmailSender.CreateEmailMessage(EmailService.Message)">
+            <summary>
+            新增電子郵件
+            </summary>
+            <param name="message">信件內容訊息物件</param>
+            <returns>MIME格式之Email</returns>
+        </member>
+        <member name="M:EmailService.EmailSender.Send(MimeKit.MimeMessage)">
+            <summary>
+            傳送MIME格式Email
+            </summary>
+            <param name="mailMessage">MIME格式之Email</param>
+        </member>
+        <member name="M:EmailService.EmailSender.SendAsync(MimeKit.MimeMessage)">
+            <summary>
+            非同步方式傳送MIME格式Email
+            </summary>
+            <param name="mailMessage">MIME格式之Email</param>
+            <returns>非同步處理執行緒</returns>
+        </member>
+        <member name="T:EmailService.IEmailSender">
+            <summary>
+            Email信件傳送器實作介面
+            </summary>
+        </member>
+        <member name="M:EmailService.IEmailSender.SendEmail(EmailService.Message)">
+            <summary>
+            傳送Email信件方法
+            </summary>
+            <param name="message">信件內容訊息物件</param>
+        </member>
+        <member name="M:EmailService.IEmailSender.SendEmailAsync(EmailService.Message)">
+            <summary>
+            非同步方式傳送Email信件方法
+            </summary>
+            <param name="message">信件內容訊息物件</param>
+            <returns>非同步處理執行緒</returns>
+        </member>
+        <member name="T:EmailService.Message">
+            <summary>
+            信件內容訊息類別
+            </summary>
+        </member>
+        <member name="P:EmailService.Message.To">
+            <summary>
+            收件者Email位址集合列表
+            </summary>
+        </member>
+        <member name="P:EmailService.Message.Subject">
+            <summary>
+            信件主旨
+            </summary>
+        </member>
+        <member name="P:EmailService.Message.Content">
+            <summary>
+            信件內容
+            </summary>
+        </member>
+        <member name="P:EmailService.Message.Attachments">
+            <summary>
+            信件附件檔案
+            </summary>
+        </member>
+        <member name="M:EmailService.Message.#ctor(System.Collections.Generic.IEnumerable{System.String},System.String,System.String,Microsoft.AspNetCore.Http.IFormFileCollection)">
+            <summary>
+            建構子
+            </summary>
+            <param name="to">收件者Email位址集合列表</param>
+            <param name="subject">信件主旨</param>
+            <param name="content">信件內容</param>
+            <param name="attachments">信件附件檔案</param>
+        </member>
+    </members>
+</doc>

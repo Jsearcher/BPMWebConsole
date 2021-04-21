@@ -1,2 +1,5 @@
 node_modules/
 Log/**
+
+# Don't include bundled files in git
+**/wwwroot/bundles

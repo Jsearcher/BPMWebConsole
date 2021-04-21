@@ -1,113 +1,178 @@
 ﻿@{
-    string ChartLabels = Model != null ? JsonConvert.SerializeObject(Model.Select(x => x.Airline.IATA_Code).ToList()) : string.Empty;
-    string ChartValues = Model != null ? JsonConvert.SerializeObject(Model.Select(x => x.Count).ToList()) : string.Empty;
+    string ProcDates = JsonConvert.SerializeObject(Model != null ? Model.Select(x => x.ProcDate).ToList() : null);
+    string Codes = JsonConvert.SerializeObject(Model != null ? Model.Select(x => x.Airline.IATA_Code).ToList() : null);
+    string Counts = JsonConvert.SerializeObject(Model != null ? Model.Select(x => x.Count).ToList() : null);
+    string ChartLegends = JsonConvert.SerializeObject(Model != null ? Model.Select(x => x.Airline.Remark).ToList() : null);
 }
 
 @model List<BPMWebConsole.Models.Source.BPMProcCount>
 
-<canvas id="bar_chart"></canvas>
+<canvas id="bar_chart" height="0", width="0"></canvas>
 
-<script src="~/lib/node_modules/chart.js/dist/Chart.js"></script>
-<script>
-        $(document).ready(function () {
-            if (@Html.Raw(ChartLabels) != "" && @Html.Raw(ChartValues) != "") {
-                GetBarChart().Update(@Html.Raw(ChartLabels), @Html.Raw(ChartValues));
-            }
+<script asp-cut-key="BPMProcCountKey" src="/lib/node_modules/chart.js/dist/Chart.js"></script>
+<script asp-cut-key="BPMProcCountKey" defer>
+    if (@Html.Raw(ProcDates) != null && @Html.Raw(Codes) != null && @Html.Raw(Counts) != null) {
+        let BarChart = GetBarChart();
+        let DataObj = { dates: @Html.Raw(ProcDates), codes: @Html.Raw(Codes), counts: @Html.Raw(Counts) };
+        BarChart.Update(DataObj);
+        //$('#bar_chart')[0].canvas.parentNode.style.height = 
+    }
+
+    function GetBarChart() {
+        let ctx = $('#bar_chart');
+
+        let bar_chart = new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: [],
+                datasets: []
+            },
+            options: {
+                hover: { "animationDuration": 0 },
+                animation: {
+                    onComplete: function () {
+                        let chartInstance = this.chart;
+                        let ctx = chartInstance.ctx;
+
+                        ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, "bold", Chart.defaults.global.defaultFontFamily);
+                        ctx.fillStyle = '#faa21b';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+                        for (let i = 0; i < this.data.datasets[0].data.length; i++) {
+                            let total = 0;
+                            let x = ctx.canvas.width;
+                            let y = ctx.canvas.height;
+                            this.data.datasets.forEach((dataset) => {
+                                total += dataset.data[i];
+                                if (dataset._meta[0].data[i]._model.x < x) {
+                                    x = dataset._meta[0].data[i]._model.x;
+                                }
+                                if (dataset._meta[0].data[i]._model.y < y) {
+                                    y = dataset._meta[0].data[i]._model.y;
+                                }
+                            });
+                            ctx.fillText(Number2Currency(total), x, y);
+                        }
+                    }
+                },
+                tooltips: {
+                    displayColors: true,
+                    mode: "label",
+                    callbacks: {
+                        label: (tooltipItem, data) => {
+                            let code = data.datasets[tooltipItem.datasetIndex].label;
+                            let count = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                            let total = 0;
+                            for (let i = 0; i < data.datasets.length; i++) {
+                                total += data.datasets[i].data[tooltipItem.index];
+                            }
+
+                            if (tooltipItem.datasetIndex != data.datasets.length - 1) {
+                                if (count > 0) {
+                                    return code + ": " + Number2Currency(count);
+                                }
+                            }
+                            else {
+                                if (count > 0) {
+                                    return [code + ": " + Number2Currency(count), "Total: " + total];
+                                }
+                                else {
+                                    return ["Total: " + total];
+                                }
+                            }
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    fontSize: 16,
+                    text: ""
+                },
+                scales: {
+                    xAxes: [{
+                        stacked: true,
+                        gridLines: { display: false }
+                    }],
+                    yAxes: [{
+                        stacked: true,
+                        ticks: { beginAtZero: true },
+                        type: "linear"
+                    }]
+                },
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: { position: "bottom" }
+            },
+            plugins: [{
+                afterDraw: chart => {
+                    let ctx = chart.chart.ctx;
+                    ctx.save();
+                    ctx.textAlign = 'left';
+                    ctx.font = "14px";
+                    ctx.fillText("BPM數量", 5, 15);
+                    ctx.restore();
+                }
+            }]
         });
 
-        var GetBarChart = () => {
-            let ctx = $('#bar_chart');
+        var Update = (data_obj) => {
+            let labels = data_obj.dates.reduce((acc, cur) => {
+                if (!acc.includes(cur)) {
+                    acc.push(cur);
+                }
+                return acc;
+            }, []);
+            let datasets = data_obj.codes.reduce((acc, cur, idx) => {
+                let date_idx = labels.indexOf(data_obj.dates[idx]);
+                let count_now = data_obj.counts[idx];
+                let dataset_length = acc.length;
 
-            let data = {
-                labels: [],
-                datasets: [{
-                    backgroundColor: gradient,
-                    borderWidth: 1,
-                    data: []
-                }]
-            }
-
-            let bar_chart = new Chart(ctx, {
-                type: "bar",
-                data: data,
-                options: {
-                    hover: { "animationDuration": 0 },
-                    animation: {
-                        onComplete: () => {
-                            let chartInstance = this.chart;
-                            let ctx = chartInstance.ctx;
-
-                            ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
-                            ctx.textAlign = 'center';
-                            ctx.textBaseline = 'bottom';
-                            this.data.datasets.forEach((dataset, i) => {
-                                let meta = chartInstance.controller.getDatasetMeta(i);
-                                meta.data.forEach((bar, index) => {
-                                    let thedata = dataset.data[index];
-                                    let x = bar._model.x;
-                                    let y = bar._model.y - 7;
-                                    let x_offset = [4, 9, 13, 20];
-                                    if (index == 0) {
-                                        ctx.fillText(FormatNumber(thedata), x + x_offset[thedata.length - 1], y);
-                                    }
-                                    else {
-                                        ctx.fillText(FormatNumber(thedata), x, y);
-                                    }
-                                });
-                            });
+                let toInit = true;
+                if (dataset_length !== 0) {
+                    for (let i = 0; i < acc.length; i++) {
+                        if (acc[i].label === cur) {
+                            toInit = false;
+                            acc[i].data[date_idx] = count_now;
+                            break;
                         }
-                    },
-                    scales: {
-                        yAxes: [{
-                            display: false,
-                            gridLines: { dispaly: false },
-                            ticks: {
-                                display: false,
-                                beginAtZero: false
-                            }
-                        }],
-                        xAxes: [{
-                            display: false,
-                            gridLines: { display: false },
-                            ticks: { beginAtZero: false }
-                        }]
-                    },
-                    title: { "display": true}
+                    }
                 }
-            });
 
-            var Update = (labels, values) => {
-                let bg_color = Array(values.length).fill(GetBGColor(0));
-                for (let i = 0; i < values.length; i++) {
-                    bg_color[i] = GetBGColor((i + 1) % 6); // 6 colors
+                if (toInit) {
+                    let dataset = { label: cur, backgroundColor: GetBGColor(dataset_length + 1), data: new Array(labels.length).fill(0) };
+                    dataset.data[date_idx] = count_now;
+                    acc.push(dataset);
                 }
-                bar_chart.data.labels = labels;
-                bar_chart.data.datasets[0].data = values;
-                bar_chart.update();
-            };
-
-            return {
-                Chart: bar_chart,
-                Update: Update
-            }
+                return acc;
+            }, [])
+            
+            bar_chart.data.labels = labels;
+            bar_chart.data.datasets = datasets;
+            bar_chart.update();
         };
 
-        let GetBGColor = (idx) => {
-            switch (idx) {
-                case 1:
-                    return "#ec7063";
-                case 2:
-                    return "#a569bd";
-                case 3:
-                    return "5dade2";
-                case 4:
-                    return "58d68d";
-                case 5:
-                    return "f4d03f";
-                case 6:
-                    return "566573";
-                default:
-                    return "0000ff";
-            }
-        };
+        return {
+            Chart: bar_chart,
+            Update: Update
+        }
+    };
+
+    function GetBGColor(idx) {
+        switch (idx) {
+            case 1:
+                return "#ec7063";
+            case 2:
+                return "#a569bd";
+            case 3:
+                return "#5dade2";
+            case 4:
+                return "#58d68d";
+            case 5:
+                return "#f4d03f";
+            case 6:
+                return "#566573";
+            default:
+                return "#0000ff";
+        }
+    };
 </script>

@@ -1,7 +1,9 @@
 ﻿@using BPMWebConsole
 @using BPMWebConsole.Models
 @using Newtonsoft.Json
-@using BPMWebConsole.Models.TagHelpers
+@using BPMWebConsole.TagHelpers
 
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@addTagHelper "*, ASI.ICT.BPMWebConsole"
+@addTagHelper *, BundlerMinifier.TagHelpers
+@addTagHelper *, ASI.ICT.BPMWebConsole
+@addTagHelper *, BPMWebConsole.Factory.CustomAttribute

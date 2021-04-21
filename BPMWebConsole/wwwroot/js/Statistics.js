@@ -30,7 +30,3 @@
         }
     });
 });
-
-function RenderBPMProcCountVC() {
-
-}

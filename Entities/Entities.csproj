@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>ASI.ICT.Lib.Entities</AssemblyName>
+    <RootNamespace>Lib.Entities</RootNamespace>
+    <Authors>KaiJyun Huang</Authors>
+    <Company>CTCI ASI</Company>
+    <Product>Entities Library for BPMWebConsole Project</Product>
+    <Copyright>Copyright © CTCI Advanced Systems Inc. 2021</Copyright>
+    <AssemblyVersion>1.0</AssemblyVersion>
+    <FileVersion>1.0.0</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ASI.ICT.Lib.Log" Version="1.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.4" />
+  </ItemGroup>
+
+</Project>

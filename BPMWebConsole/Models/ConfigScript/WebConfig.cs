@@ -47,6 +47,16 @@ namespace BPMWebConsole.Models.ConfigScript
             /// 檢查航空公司MQ連線處理之時間間隔(秒)
             /// </summary>
             public int MQCheckPeriod { get; set; }
+
+            /// <summary>
+            /// Cookie中網頁登入權限保留時間(分鐘)
+            /// </summary>
+            public int ExpiredTimeSpan { get; set; }
+
+            /// <summary>
+            /// 忘記密碼重置頁面有效保留時間(分鐘)
+            /// </summary>
+            public int TokenLifespan { get; set; }
         }
         /// <summary>
         /// 記錄暫存組態設定參數類別
@@ -57,6 +67,52 @@ namespace BPMWebConsole.Models.ConfigScript
             /// 各航空公司MQ連線之處理剩餘數(上一次)
             /// </summary>
             public string AirlineMQ { get; set; }
+        }
+        /// <summary>
+        /// Session對應存放名稱(session key)組態設定參數類別
+        /// </summary>
+        public class SessionKey
+        {
+            /// <summary>
+            /// 圖形驗證碼 session key
+            /// </summary>
+            public string CaptchaImg { get; set; }
+        }
+        /// <summary>
+        /// 圖形驗證碼組態設定參數類別
+        /// </summary>
+        public class Captcha
+        {
+            /// <summary>
+            /// 圖片寬度(px)
+            /// </summary>
+            public int Width { get; set; }
+
+            /// <summary>
+            /// 圖片高度(px)
+            /// </summary>
+            public int Height { get; set; }
+
+            /// <summary>
+            /// 驗證碼字元亮度(0-255)
+            /// </summary>
+            public int TextLightness { get; set; }
+
+            /// <summary>
+            /// 干擾線亮度(0-255)
+            /// </summary>
+            public int InterferenceLightness { get; set; }
+
+            /// <summary>
+            /// 驗證碼隨機產生字元集
+            /// </summary>
+            /// <remarks>若混用大小寫英文與數字須避開"l1Oo0"等混淆字元</remarks>
+            public string Chars { get; set; }
+
+            /// <summary>
+            /// 驗證碼字元數量
+            /// </summary>
+            public int Number { get; set; }
         }
         /// <summary>
         /// 組態設定參數集合類別
@@ -75,6 +131,14 @@ namespace BPMWebConsole.Models.ConfigScript
             /// 記錄暫存組態設定參數類別物件
             /// </summary>
             public TempRecord TempRecord { get; set; }
+            /// <summary>
+            /// Session對應存放名稱(session key)組態設定參數類別物件
+            /// </summary>
+            public SessionKey SessionKey { get; set; }
+            /// <summary>
+            /// 圖行驗證碼組態設定參數類別物件
+            /// </summary>
+            public Captcha Captcha { get; set; }
         }
         /// <summary>
         /// 組態設定參數根集合類別
@@ -143,7 +207,7 @@ namespace BPMWebConsole.Models.ConfigScript
                 /// <c>WebPropertySetting</c> 通用物件實體
                 /// </summary>
                 /// <remarks>預設組態設定檔案"appsettings.json"位置為工作目錄，且系統組態設定檔之區段路徑為"WebPropSetting"</remarks>
-                public static readonly WebPropertySetting INSTANCE = new WebPropertySetting("WebPropSetting");
+                public static readonly WebPropSetting INSTANCE = new WebPropertySetting("WebPropSetting").ConfigRoot.properties.WebPropSetting;
             }
             #endregion
 
@@ -176,10 +240,10 @@ namespace BPMWebConsole.Models.ConfigScript
 
             #region =====[Public] Method=====
             /// <summary>
-            /// 取得系統組態設定(Configuration)物件實體
+            /// 取得系統組態設定(Configuration)參數集合物件實體
             /// </summary>
-            /// <returns><c>WebPropertySetting</c> 通用物件實體</returns>
-            public static WebPropertySetting Instance()
+            /// <returns><c>WebPropSetting</c> 參數集合物件實體</returns>
+            public static WebPropSetting Instance()
             {
                 return LazyHolder.INSTANCE;
             }

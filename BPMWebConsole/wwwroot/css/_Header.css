@@ -76,15 +76,35 @@ header {
             cursor: pointer;
         }
 
-            header .header_right .login_area .login_name, header .header_right .login_area .logout {
+            header .header_right .login_area .login_name {
+                position: relative;
+                max-width: 350px;
+                min-width: 80px;
+            }
+
+            header .header_right .login_area .logout_form {
                 position: relative;
                 max-width: 150px;
                 min-width: 80px;
             }
 
-                header .header_right .login_area .login_name:hover, header .header_right .login_area .logout:hover {
+                header .header_right .login_area .login_name:hover,
+                header .header_right .login_area .logout_form:hover,
+                header .header_right .login_area .logout_form .logout:hover {
                     color: #faa21b;
                 }
+
+                header .header_right .login_area .logout_form .logout {
+                    width: 75px;
+                    position: relative;
+                    background-color: #242832;
+                    font-size: 16px;
+                    margin: 0;
+                }
+
+                    header .header_right .login_area .logout_form .logout > * {
+                        display: inline-block;
+                    }
 
 @media screen and (max-width: 1160px) {
     header .header_left .system_name {

@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Registrator";
+    Layout = "_LayoutAccount";
+}
+
+@model BPMWebConsole.Models.ViewModels.UserRegistrationModel
+
+@section styles {
+    <link rel="stylesheet" href="~/css/Register.css" />
+}
+
+@section scripts {
+    <script src="~/js/Register.js"></script>
+}
+
+<form class="register_form" id="register_form" asp-controller="Account" asp-action="Register">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="condition_area">
+        <div class="register_input inner-addon left-addon">
+            <i class="far fa-user-circle fa-1x glyphicon"></i>
+            <input class="form-control" type="text" placeholder="輸入您的名字(First Name)" asp-for="FirstName" />
+        </div>
+        <div class="register_input inner-addon left-addon">
+            <i class="far fa-user-circle fa-1x glyphicon"></i>
+            <input class="form-control" type="text" placeholder="輸入您的姓氏(Last Name)" asp-for="LastName" />
+        </div>
+        <div class="register_input inner-addon left-addon">
+            <i class="far fa-envelope glyphicon"></i>
+            <input class="form-control" type="email" placeholder="帳號，例：abc123@gmail.com" asp-for="Email" />
+        </div>
+        <div class="register_input inner-addon left-addon">
+            <i class="fa fa-lock fa-1x glyphicon"></i>
+            <input class="form-control" type="password" placeholder="輸入您的密碼" asp-for="Password" />
+        </div>
+        <div class="register_input inner-addon left-addon">
+            <i class="fa fa-lock fa-1x glyphicon"></i>
+            <input class="form-control" type="password" placeholder="重複輸入密碼" asp-for="ConfirmPassword" />
+        </div>
+    </div>
+    <div class="submit_area">
+        <button class="button register" id="submit_btn" type="submit">提交</button>
+        <button class="button back" id="back_btn" type="button">返回</button>
+    </div>
+</form>

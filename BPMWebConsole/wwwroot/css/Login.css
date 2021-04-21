@@ -1,0 +1,74 @@
+﻿.content .account_container .account_area .login_form {
+    position: relative;
+    box-sizing: border-box;
+    width: 75%;
+    margin: auto;
+    padding-top: 3%;
+}
+
+    .content .account_container .account_area .login_form .condition_area,
+    .content .account_container .account_area .login_form .condition_area div {
+        display: inline-block;
+    }
+
+        .content .account_container .account_area .login_form .condition_area .login_input:not([class=login_fixed_line]) {
+            height: 30px;
+            width: 100%;
+            margin: 3px auto;
+        }
+
+        .content .account_container .account_area .login_form .condition_area login_fixed_line {
+            height: 30px;
+            width: 100%;
+        }
+
+        .content .account_container .account_area .login_form .condition_area .login_input input {
+            display: inline-block;
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 30px;
+        }
+
+        .content .account_container .account_area .login_form .condition_area .login_fixed_line .captcha_input {
+            padding-left: 17px;
+            height: 30px;
+            width: 40%;
+        }
+
+        .content .account_container .account_area .login_form .condition_area .login_fixed_line #captcha_img {
+            cursor: pointer;
+        }
+
+        .content .account_container .account_area .login_form .submit_area {
+            text-align: center;
+        }
+
+        .content .account_container .account_area .login_form .submit_area .login {
+            height: 40px;
+            width: 150px;
+            background-color: #faa21b;
+            margin: 1vh auto;
+            font-size: 18px;
+        }
+
+            .content .account_container .account_area .login_form .submit_area .login:hover {
+                background-color: #141822;
+                transition: .2s;
+            }
+
+.content .account_container .account_area .account_action a:nth-child(n) {
+    display: inline-block;
+    padding: 0 6px;
+    font-size: 14px;
+    text-align: center;
+    border-left: 1px solid #faa21b;
+}
+
+.content .account_container .account_area .account_action a:first-child {
+    border: initial;
+    padding-left: 0;
+}
+
+.content .account_container .account_area .account_action a:last-child {
+    padding-right: 0;
+}

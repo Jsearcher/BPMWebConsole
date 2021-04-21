@@ -17,6 +17,11 @@
   "author": "KaiJyun Huang",
   "license": "ISC",
   "dependencies": {
-    "chart.js": "^2.9.4"
+    "@fortawesome/fontawesome-free": "^5.15.2",
+    "bootstrap": "^4.6.0",
+    "chart.js": "^2.9.4",
+    "jquery-validation": "^1.19.3",
+    "jquery-validation-unobtrusive": "^3.2.12",
+    "tippy.js": "^6.3.1"
   }
 }

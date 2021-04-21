@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BPM Web Console</title>
+    <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="~/favicon_bpm.ico" />
+
+    <!-- Add CSS style sheet -->
+    <link rel="stylesheet" href="~/lib/node_modules/@@fortawesome/fontawesome-free/css/all.min.css" />
+    <link rel="stylesheet" href="~/lib/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/_Layout.css" />
+    <link rel="stylesheet" href="~/css/_LayoutAccount.css" />
+    @RenderSection("styles", required: false)
+</head>
+<body>
+    <div class="content">
+        <div class="account_container">
+            <div class="title_area">
+                <div class="airport_logo">
+                    <img src="~/image/airport_logo.png" alt="Taoyuan Airport Logo" />
+                </div>
+                <div class="title">
+                    桃園國際機場<br />
+                    BPM系統通訊狀態 操作工作站
+                </div>
+            </div>
+            <div class="account_area">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <footer>
+        <img src="~/image/CTCI_logo/logo.png" alt="CTCI Logo" />
+        <span>Copyright &copy; @DateTime.Now.Year CTCI ASI All rights reserved.</span>
+    </footer>
+
+    <bundle name="wwwroot/bundles/jquery/jquery-bundle.min.js"></bundle>
+    <bundle name="wwwroot/bundles/tooltip/tooltip-bundle.min.js"></bundle>
+    <script src="~/lib/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="~/js/_ValidatorSetting.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

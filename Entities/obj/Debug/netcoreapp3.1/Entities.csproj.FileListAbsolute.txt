@@ -1,0 +1,9 @@
+D:\VS Code\Webs\BPMWebConsole\Entities\bin\Debug\netcoreapp3.1\ASI.ICT.Lib.Entities.deps.json
+D:\VS Code\Webs\BPMWebConsole\Entities\bin\Debug\netcoreapp3.1\ASI.ICT.Lib.Entities.dll
+D:\VS Code\Webs\BPMWebConsole\Entities\bin\Debug\netcoreapp3.1\ASI.ICT.Lib.Entities.pdb
+D:\VS Code\Webs\BPMWebConsole\Entities\obj\Debug\netcoreapp3.1\Entities.csprojAssemblyReference.cache
+D:\VS Code\Webs\BPMWebConsole\Entities\obj\Debug\netcoreapp3.1\Entities.AssemblyInfoInputs.cache
+D:\VS Code\Webs\BPMWebConsole\Entities\obj\Debug\netcoreapp3.1\Entities.AssemblyInfo.cs
+D:\VS Code\Webs\BPMWebConsole\Entities\obj\Debug\netcoreapp3.1\Entities.csproj.CoreCompileInputs.cache
+D:\VS Code\Webs\BPMWebConsole\Entities\obj\Debug\netcoreapp3.1\ASI.ICT.Lib.Entities.dll
+D:\VS Code\Webs\BPMWebConsole\Entities\obj\Debug\netcoreapp3.1\ASI.ICT.Lib.Entities.pdb

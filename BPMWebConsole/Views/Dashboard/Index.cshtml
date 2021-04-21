@@ -30,5 +30,11 @@
     <div class="status_container" id="brs_status"></div>
 </div>
 <div class="sub_area_right">
-
+    <h2>Claim details</h2>
+    <ul>
+        @foreach (var claim in User.Claims)
+        {
+            <li><strong>@claim.Type</strong>: @claim.Value</li>
+        }
+    </ul>
 </div>

@@ -21,7 +21,7 @@ namespace BPMWebConsole.Models.Service
         /// <summary>
         /// BPMDB供此Web Application使用之資料庫連線參數
         /// </summary>
-        private static readonly string BPMDB_ConnStr = WebConfig.WebPropertySetting.Instance().ConfigRoot.properties.WebPropSetting.DBServer.BPMDB;
+        private static readonly string BPMDB_ConnStr = WebConfig.WebPropertySetting.Instance().DBServer.BPMDB;
 
         #endregion
 

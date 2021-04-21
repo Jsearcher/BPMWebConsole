@@ -1,12 +1,9 @@
 ﻿using BPMWebConsole.Models.Service;
 using BPMWebConsole.Models.Source;
 using BPMWebConsole.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BPMWebConsole.Controllers
 {
@@ -20,6 +17,7 @@ namespace BPMWebConsole.Controllers
         /// 進入點頁面控制
         /// </summary>
         /// <returns>統計數量查詢頁面資料</returns>
+        [Authorize]
         [Route("Index.html")]
         public IActionResult Index()
         {
@@ -36,7 +34,8 @@ namespace BPMWebConsole.Controllers
         /// <para>Airline: 所選擇之航空公司代碼(IATA)</para>
         /// </param>
         /// <returns>統計數量查詢頁面資料</returns>
-        [HttpPost, ValidateAntiForgeryToken]
+        [Authorize]
+        [HttpPost("QueryBPMResult"), ValidateAntiForgeryToken]
         public IActionResult QueryBPMResult(StatisticsViewModel modelData)
         {
             modelData.FormsModel.QueryStatus = -1;

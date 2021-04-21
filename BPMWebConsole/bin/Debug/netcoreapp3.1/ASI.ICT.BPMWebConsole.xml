@@ -1,0 +1,1622 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ASI.ICT.BPMWebConsole</name>
+    </assembly>
+    <members>
+        <member name="T:BPMWebConsole.Controllers.AccountController">
+            <summary>
+            註冊頁面控制類別
+            </summary>
+        </member>
+        <member name="F:BPMWebConsole.Controllers.AccountController._mapper">
+            <summary>
+            Entity與ViewModel間的物件對映功能介面
+            </summary>
+        </member>
+        <member name="F:BPMWebConsole.Controllers.AccountController._userManager">
+            <summary>
+            管理所儲存之使用者資料實體的方法API
+            </summary>
+        </member>
+        <member name="F:BPMWebConsole.Controllers.AccountController._signInManager">
+            <summary>
+            管理使用者登入的方法API
+            </summary>
+        </member>
+        <member name="F:BPMWebConsole.Controllers.AccountController._emailSender">
+            <summary>
+            Email信件傳送器
+            </summary>
+        </member>
+        <member name="F:BPMWebConsole.Controllers.AccountController.captchaSessionWapper">
+            <summary>
+            Session強型別包裝物件
+            </summary>
+        </member>
+        <member name="F:BPMWebConsole.Controllers.AccountController.captchaService">
+            <summary>
+            登入用圖形驗證碼服務
+            </summary>
+        </member>
+        <member name="M:BPMWebConsole.Controllers.AccountController.#ctor(AutoMapper.IMapper,Microsoft.AspNetCore.Identity.UserManager{BPMWebConsole.Models.Entities.User},Microsoft.AspNetCore.Identity.SignInManager{BPMWebConsole.Models.Entities.User},EmailService.IEmailSender,BPMWebConsole.Factory.CustomSession.ISessionWapper{System.String})">
+            <summary>
+            建構子
+            </summary>
+            <param name="mapper">Entity與ViewModel間的物件對映功能介面</param>
+            <param name="userManager">管理所儲存之使用者資料實體的方法API</param>
+            <param name="signInManager">管理使用者登入的方法API</param>
+            <param name="emailSender">Email信件傳送器</param>
+            <param name="captchaSessionWapper">圖形驗證碼Session強型別包裝物件</param>
+        </member>
+        <member name="M:BPMWebConsole.Controllers.AccountController.Register">
+            <summary>
+            註冊頁面進入點控制
+            </summary>
+            <returns>初始註冊頁面</returns>
+        </member>
+        <member name="M:BPMWebConsole.Controllers.AccountController.Register(BPMWebConsole.Models.ViewModels.UserRegistrationModel)">
+            <summary>
+            註冊動作邏輯控制
+            </summary>
+            <param name="userModel">註冊頁面模型資料</param>
+            <returns>
+            <para>註冊資料驗證成功導向Login頁面</para>
+            <para>註冊資料驗證失敗重新導入此註冊頁面並顯示錯誤提示</para>
+            </returns>
+        </member>
+        <member name="M:BPMWebConsole.Controllers.AccountController.ForgotPassowrd">
+            <summary>
+            忘記密碼頁面進入點控制
+            </summary>
+            <returns>初始忘記密碼頁面</returns>
+        </member>
+        <member name="M:BPMWebConsole.Controllers.AccountController.ForgotPassword(BPMWebConsole.Models.ViewModels.ForgotPasswordModel)">
+            <summary>
+            忘記密碼請求動作邏輯控制
+            </summary>
+            <param name="forgotPasswordModel">忘記密碼頁面模型資料</param>
+            <returns>
+            <para>忘記密碼之Email資料驗證失敗導向ForgotPassword頁面</para>
+            <para>忘記密碼之Email資料驗證成功並完成發送信件後，導向ForgotPasswordConfirmation頁面</para>
+            </returns>
+        </member>
+        <member name="M:BPMWebConsole.Controllers.AccountController.ForgotPasswordConfirmation">
+            <summary>
+            忘記密碼信件通知之確認頁面進入點控制
+            </summary>
+            <returns>初始忘記密碼信件通知確認頁面</returns>
+        </member>
+        <member name="M:BPMWebConsole.Controllers.AccountController.ResetPassword(System.String,System.String)">
+            <summary>
+            依核准的操作代幣初始化密碼重置頁面進入點控制
+            </summary>
+            <param name="token">特定使用者有效重置密碼之操作代幣</param>
+            <param name="email">收件者Email位址</param>
+            <returns>初始化密碼重置頁面</returns>
+        </member>
+        <member name="M:BPMWebConsole.Controllers.AccountController.ResetPassword(BPMWebConsole.Models.ViewModels.ResetPasswordModel)">
+            <summary>
+            密碼重置請求動作邏輯控制
+            </summary>
+            <param name="resetPasswordModel">登入密碼重置操作資料</param>
+            <returns></returns>
+        </member>
+        <member name="M:BPMWebConsole.Controllers.AccountController.ResetPasswordConfirmation">
+            <summary>
+            重置密碼結果確認頁面進入點控制
+            </summary>
+            <returns>重置密碼結果確認頁面</returns>
+        </member>
+        <member name="M:BPMWebConsole.Controllers.AccountController.Login">
+            <summary>
+            進入點頁面控制
+            </summary>
+            <returns>初始登入頁面</returns>
+        </member>
+        <member name="M:BPMWebConsole.Controllers.AccountController.Login(BPMWebConsole.Models.ViewModels.LoginViewModel)">
+            <summary>
+            使用者登入作業
+            </summary>
+            <param name="modelData">登入頁面資料集合之使用者登入資料</param>
+            <returns>
+            <para>驗證成功導向Dashboard頁面</para>
+            <para>驗證失敗重新導入Login頁面</para>
+            </returns>
+        </member>
+        <member name="M:BPMWebConsole.Controllers.AccountController.Logout">
+            <summary>
+            使用者登出作業
+            </summary>
+            <returns>使用者登出後重新導入至登入頁面</returns>
+        </member>
+        <member name="M:BPMWebConsole.Controllers.AccountController.GetCaptcha">
+            <summary>
+            取得隨機圖形驗證碼
+            </summary>
+            <returns>預設4個字元之隨機圖形驗證碼</returns>
+        </member>
+        <member name="M:BPMWebConsole.Controllers.AccountController.RedirectToLocal(System.String)">
+            <summary>
+            登入後頁面導向控制
+            </summary>
+            <param name="returnRul">頁面導向網址</param>
+            <returns>導向目標相對網址之網頁或首頁</returns>
+            <remarks>僅導向網站內部網頁，避免開放式重新導向攻擊</remarks>
+        </member>
+        <member name="T:BPMWebConsole.Controllers.DashboardController">
+            <summary>
+            通訊連線狀態儀表板頁面控制類別
+            </summary>
+        </member>
+        <member name="M:BPMWebConsole.Controllers.DashboardController.Index">
+            <summary>
+            進入點頁面控制
+            </summary>
+            <returns>通訊連線狀態參數清單</returns>
+        </member>
+        <member name="M:BPMWebConsole.Controllers.DashboardController.GetCommStatusVC(System.Int32)">
+            <summary>
+            依通訊連線運作狀態種類取得目前該狀態之顯示元件
+            </summary>
+            <param name="id">通訊連線運作狀態種類
+            <para>1: <c>StatusType.BPMServer</c></para>
+            <para>2: <c>StatusType.AirlineMQ</c></para>
+            <para>3: <c>StatusType.BRS2BPM</c></para>
+            </param>
+            <returns>狀態之顯示元件</returns>
+        </member>
+        <member name="T:BPMWebConsole.Controllers.HomeController">
+            <summary>
+            首頁登入頁面控制類別
+            </summary>
+        </member>
+        <member name="T:BPMWebConsole.Controllers.StatisticsController">
+            <summary>
+            統計數量查詢頁面控制類別
+            </summary>
+        </member>
+        <member name="M:BPMWebConsole.Controllers.StatisticsController.Index">
+            <summary>
+            進入點頁面控制
+            </summary>
+            <returns>統計數量查詢頁面資料</returns>
+        </member>
+        <member name="M:BPMWebConsole.Controllers.StatisticsController.QueryBPMResult(BPMWebConsole.Models.ViewModels.StatisticsViewModel)">
+            <summary>
+            依條件查詢BPM通訊統計數量
+            </summary>
+            <param name="modelData">查詢條件
+            <para>DateStart: 起始日期</para>
+            <para>DateEnd: 結束日期</para>
+            <para>Airline: 所選擇之航空公司代碼(IATA)</para>
+            </param>
+            <returns>統計數量查詢頁面資料</returns>
+        </member>
+        <member name="T:BPMWebConsole.Extensions.SessionExtensions">
+            <summary>
+            Session擴充方法類別
+            </summary>
+        </member>
+        <member name="M:BPMWebConsole.Extensions.SessionExtensions.SetObject``1(Microsoft.AspNetCore.Http.ISession,System.String,``0)">
+            <summary>
+            設置Session存放內容
+            </summary>
+            <typeparam name="T">存放內容之型別</typeparam>
+            <param name="session">Session名稱</param>
+            <param name="key">對應的存放名稱</param>
+            <param name="value">存放內容</param>
+        </member>
+        <member name="M:BPMWebConsole.Extensions.SessionExtensions.GetObject``1(Microsoft.AspNetCore.Http.ISession,System.String)">
+            <summary>
+            取出Session存放內容
+            </summary>
+            <typeparam name="T">存放內容之型別</typeparam>
+            <param name="session">Session名稱</param>
+            <param name="key">對應的存放名稱</param>
+            <returns>存放內容</returns>
+        </member>
+        <member name="T:BPMWebConsole.Factory.CustomAttribute.ShortenTagNameAttribute">
+            <summary>
+            有標註"asp-for"屬性之"input"元素控制類別
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Factory.CustomAttribute.ShortenTagNameAttribute.IsShortName">
+            <summary>
+            自定義此Html Tag之Name屬性名稱是否以縮短表示
+            </summary>
+        </member>
+        <member name="M:BPMWebConsole.Factory.CustomAttribute.ShortenTagNameAttribute.#ctor(Microsoft.AspNetCore.Mvc.ViewFeatures.IHtmlGenerator)">
+            <summary>
+            建構子
+            </summary>
+            <param name="generator">Tag Helper產生控制物件</param>
+        </member>
+        <member name="M:BPMWebConsole.Factory.CustomAttribute.ShortenTagNameAttribute.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)">
+            <summary>
+            縮短並替換Name屬性之內容值
+            </summary>
+            <param name="context">目前HTML Tag的內容資訊</param>
+            <param name="output">經TagHelper產出之Html Tag內容</param>
+        </member>
+        <member name="T:BPMWebConsole.Factory.CustomClaims.CustomClaimsFactory">
+            <summary>
+            提供使用者宣告準則之方法類別
+            </summary>
+        </member>
+        <member name="M:BPMWebConsole.Factory.CustomClaims.CustomClaimsFactory.#ctor(Microsoft.AspNetCore.Identity.UserManager{BPMWebConsole.Models.Entities.User},Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})">
+            <summary>
+            建構子
+            </summary>
+            <param name="userManager">管理所儲存之使用者資料實體的方法API</param>
+            <param name="optionsAccessor">Identity中所有可使用之組態設定選項</param>
+        </member>
+        <member name="M:BPMWebConsole.Factory.CustomClaims.CustomClaimsFactory.GenerateClaimsAsync(BPMWebConsole.Models.Entities.User)">
+            <summary>
+            異步產生使用者宣告準則
+            </summary>
+            <param name="user">使用者資料物件</param>
+            <returns>身分宣告物件集合</returns>
+            <remarks>在Cookie中加入宣告的使用者資訊(姓名、角色)</remarks>
+        </member>
+        <member name="T:BPMWebConsole.Factory.CustomSession.CaptchaSessionWapper">
+            <summary>
+            Session強型別包裝類別
+            </summary>
+        </member>
+        <member name="F:BPMWebConsole.Factory.CustomSession.CaptchaSessionWapper._key">
+            <summary>
+            Session key
+            </summary>
+        </member>
+        <member name="F:BPMWebConsole.Factory.CustomSession.CaptchaSessionWapper._httpContextAccessor">
+            <summary>
+            HTTP Context接收器
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Factory.CustomSession.CaptchaSessionWapper.Session">
+            <summary>
+            Session物件
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Factory.CustomSession.CaptchaSessionWapper.Model">
+            <summary>
+            目標模型物件
+            </summary>
+        </member>
+        <member name="M:BPMWebConsole.Factory.CustomSession.CaptchaSessionWapper.#ctor(Microsoft.AspNetCore.Http.IHttpContextAccessor)">
+            <summary>
+            建構子
+            </summary>
+            <param name="httpContextAccessor">HTTP Context接收器</param>
+        </member>
+        <member name="T:BPMWebConsole.Factory.CustomSession.ISessionWapper`1">
+            <summary>
+            Session強型別包裝介面
+            </summary>
+            <typeparam name="T">目標包裝型別</typeparam>
+        </member>
+        <member name="P:BPMWebConsole.Factory.CustomSession.ISessionWapper`1.Model">
+            <summary>
+            目標模型物件
+            </summary>
+        </member>
+        <member name="T:BPMWebConsole.MappingConfigurations.MappingProfile">
+            <summary>
+            Entity與ViewModel間的物件對映類別
+            </summary>
+        </member>
+        <member name="M:BPMWebConsole.MappingConfigurations.MappingProfile.#ctor">
+            <summary>
+            建構子
+            </summary>
+        </member>
+        <member name="T:BPMWebConsole.Models.ConfigScript.WebConfig">
+            <summary>
+            WEB應用程式中 <c>appsettings.json</c> 組態設定("WebPropSetting")之處理類別
+            </summary>
+        </member>
+        <member name="T:BPMWebConsole.Models.ConfigScript.WebConfig.DBServer">
+            <summary>
+            DB相關組態設定參數類別
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ConfigScript.WebConfig.DBServer.ServerDB">
+            <summary>
+            DB連接參數
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ConfigScript.WebConfig.DBServer.BPMDB">
+            <summary>
+            BPM Server DB連接參數
+            </summary>
+        </member>
+        <member name="T:BPMWebConsole.Models.ConfigScript.WebConfig.Basic">
+            <summary>
+            其他基本組態設定參數類別
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ConfigScript.WebConfig.Basic.Mode">
+            <summary>
+            程式執行模式
+            </summary>
+            <remarks>
+            <para>0: 表示為測試模式</para>
+            <para>1: 表示為正式運行模式</para>
+            </remarks>
+        </member>
+        <member name="P:BPMWebConsole.Models.ConfigScript.WebConfig.Basic.TestDate">
+            <summary>
+            測試模式運行下使用之測試日期，格式為"yyyy-MM-dd"
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ConfigScript.WebConfig.Basic.MQCheckPeriod">
+            <summary>
+            檢查航空公司MQ連線處理之時間間隔(秒)
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ConfigScript.WebConfig.Basic.ExpiredTimeSpan">
+            <summary>
+            Cookie中網頁登入權限保留時間(分鐘)
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ConfigScript.WebConfig.Basic.TokenLifespan">
+            <summary>
+            忘記密碼重置頁面有效保留時間(分鐘)
+            </summary>
+        </member>
+        <member name="T:BPMWebConsole.Models.ConfigScript.WebConfig.TempRecord">
+            <summary>
+            記錄暫存組態設定參數類別
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ConfigScript.WebConfig.TempRecord.AirlineMQ">
+            <summary>
+            各航空公司MQ連線之處理剩餘數(上一次)
+            </summary>
+        </member>
+        <member name="T:BPMWebConsole.Models.ConfigScript.WebConfig.SessionKey">
+            <summary>
+            Session對應存放名稱(session key)組態設定參數類別
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ConfigScript.WebConfig.SessionKey.CaptchaImg">
+            <summary>
+            圖形驗證碼 session key
+            </summary>
+        </member>
+        <member name="T:BPMWebConsole.Models.ConfigScript.WebConfig.Captcha">
+            <summary>
+            圖形驗證碼組態設定參數類別
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ConfigScript.WebConfig.Captcha.Width">
+            <summary>
+            圖片寬度(px)
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ConfigScript.WebConfig.Captcha.Height">
+            <summary>
+            圖片高度(px)
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ConfigScript.WebConfig.Captcha.TextLightness">
+            <summary>
+            驗證碼字元亮度(0-255)
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ConfigScript.WebConfig.Captcha.InterferenceLightness">
+            <summary>
+            干擾線亮度(0-255)
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ConfigScript.WebConfig.Captcha.Chars">
+            <summary>
+            驗證碼隨機產生字元集
+            </summary>
+            <remarks>若混用大小寫英文與數字須避開"l1Oo0"等混淆字元</remarks>
+        </member>
+        <member name="P:BPMWebConsole.Models.ConfigScript.WebConfig.Captcha.Number">
+            <summary>
+            驗證碼字元數量
+            </summary>
+        </member>
+        <member name="T:BPMWebConsole.Models.ConfigScript.WebConfig.WebPropSetting">
+            <summary>
+            組態設定參數集合類別
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ConfigScript.WebConfig.WebPropSetting.DBServer">
+            <summary>
+            DB相關組態設定參數類別物件
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ConfigScript.WebConfig.WebPropSetting.Basic">
+            <summary>
+            其他基本組態設定參數類別物件
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ConfigScript.WebConfig.WebPropSetting.TempRecord">
+            <summary>
+            記錄暫存組態設定參數類別物件
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ConfigScript.WebConfig.WebPropSetting.SessionKey">
+            <summary>
+            Session對應存放名稱(session key)組態設定參數類別物件
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ConfigScript.WebConfig.WebPropSetting.Captcha">
+            <summary>
+            圖行驗證碼組態設定參數類別物件
+            </summary>
+        </member>
+        <member name="T:BPMWebConsole.Models.ConfigScript.WebConfig.WebSetting">
+            <summary>
+            組態設定參數根集合類別
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ConfigScript.WebConfig.WebSetting.WebPropSetting">
+            <summary>
+            組態設定參數集合類別
+            </summary>
+        </member>
+        <member name="T:BPMWebConsole.Models.ConfigScript.WebConfig.WebPropSettingDI">
+            <summary>
+            依賴類別注入服務之應用類別，取得指定之組態設定檔內容(WebSetting)
+            </summary>
+            <remarks>
+            <para>泛型<c>T</c>之對應之組態設定區段的依賴類別，使用<c>WebPropSetting</c></para>
+            <para><c>properties</c>參數依 <c>WebPropSetting</c> 依賴類別存取目前組態設定值</para>
+            </remarks>
+        </member>
+        <member name="M:BPMWebConsole.Models.ConfigScript.WebConfig.WebPropSettingDI.#ctor(Microsoft.Extensions.Options.IOptions{BPMWebConsole.Models.ConfigScript.WebConfig.WebPropSetting})">
+            <summary>
+            建構子
+            </summary>
+            <param name="aprop">組態設定依賴轉換之物件參數</param>
+        </member>
+        <member name="T:BPMWebConsole.Models.ConfigScript.WebConfig.WebSettingRootDI">
+            <summary>
+            依賴類別注入服務之應用類別，取得指定之組態設定檔內容(Root)
+            </summary>
+        </member>
+        <member name="M:BPMWebConsole.Models.ConfigScript.WebConfig.WebSettingRootDI.#ctor(Microsoft.Extensions.Options.IOptions{BPMWebConsole.Models.ConfigScript.WebConfig.WebSetting})">
+            <summary>
+            建構子
+            </summary>
+            <param name="aprop">組態設定依賴轉換之物件參數</param>
+        </member>
+        <member name="T:BPMWebConsole.Models.ConfigScript.WebConfig.WebPropertySetting">
+            <summary>
+            系統組態設定(appsettings.json)相關處理類別
+            </summary>
+        </member>
+        <member name="T:BPMWebConsole.Models.ConfigScript.WebConfig.WebPropertySetting.LazyHolder">
+            <summary>
+            靜態初始化通用物件實體類別
+            </summary>
+        </member>
+        <member name="F:BPMWebConsole.Models.ConfigScript.WebConfig.WebPropertySetting.LazyHolder.INSTANCE">
+            <summary>
+            <c>WebPropertySetting</c> 通用物件實體
+            </summary>
+            <remarks>預設組態設定檔案"appsettings.json"位置為工作目錄，且系統組態設定檔之區段路徑為"WebPropSetting"</remarks>
+        </member>
+        <member name="P:BPMWebConsole.Models.ConfigScript.WebConfig.WebPropertySetting.ConfigRoot">
+            <summary>
+            系統組態設定(Configuration)根物件
+            </summary>
+        </member>
+        <member name="M:BPMWebConsole.Models.ConfigScript.WebConfig.WebPropertySetting.#ctor(System.String)">
+            <summary>
+            建構子
+            </summary>
+            <param name="pSectionPath">系統組態設定檔之區段路徑，無指定則填入<c>null</c>或<c>string.Empty</c></param>
+        </member>
+        <member name="M:BPMWebConsole.Models.ConfigScript.WebConfig.WebPropertySetting.#ctor(System.String,System.String)">
+            <summary>
+            建構子
+            </summary>
+            <param name="pSectionPath">系統組態設定檔之區段路徑，無指定則填入<c>null</c>或<c>string.Empty</c></param>
+            <param name="pConfigPath">系統組態設定檔之檔案路徑名稱</param>
+        </member>
+        <member name="M:BPMWebConsole.Models.ConfigScript.WebConfig.WebPropertySetting.Instance">
+            <summary>
+            取得系統組態設定(Configuration)參數集合物件實體
+            </summary>
+            <returns><c>WebPropSetting</c> 參數集合物件實體</returns>
+        </member>
+        <member name="T:BPMWebConsole.Models.DAO.BPMLast">
+            <summary>
+            "BPM_LAST"資料表類別
+            </summary>
+        </member>
+        <member name="T:BPMWebConsole.Models.DAO.BPMLast.Row">
+            <summary>
+            資料表欄位物件
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.BPMLast.Row.BSM_DATE">
+            <summary>
+            行李所屬航班之作業日期，格式為yyyyMMdd
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.BPMLast.Row.BAG_TAG">
+            <summary>
+            行李條碼編號
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.BPMLast.Row.BSM_STATE">
+            <summary>
+            行李處理狀態
+            </summary>
+            <remarks>
+            <para>0: 刪除</para>
+            <para>1: 新增</para>
+            <para>2: 更新</para>
+            </remarks>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.BPMLast.Row.BAG_STATE">
+            <summary>
+            行李裝載狀態
+            </summary>
+            <remarks>
+            <para> 0: 新增</para>
+            <para>10: 裝櫃</para>
+            <para>11: 卸載</para>
+            </remarks>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.BPMLast.Row.AUTH_LOAD">
+            <summary>
+            行李裝載許可
+            </summary>
+            <remarks>
+            <para>Y: 允許</para>
+            <para>N: 不允許</para>
+            </remarks>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.BPMLast.Row.AUTH_TRANSPORT">
+            <summary>
+            行李運送許可
+            </summary>
+            <remarks>
+            <para>Y: 允許</para>
+            <para>N: 不允許</para>
+            </remarks>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.BPMLast.Row.BSM_SOURCE">
+            <summary>
+            行李BSM訊息字串
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.BPMLast.Row.BPM_SOURCE">
+            <summary>
+            行李BPM訊息字串(裝、卸載)
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.BPMLast.Row.UPD_TIME">
+            <summary>
+            資料列變動時間，格式為yyyyMMddHHmmss
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.BPMLast.Row.BSM_FLIGHT">
+            <summary>
+            行李所屬航班編號
+            </summary>
+            <remarks>行李應裝載行搬</remarks>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.BPMLast.Row.BAG_FLIGHT">
+            <summary>
+            行李裝載航班編號
+            </summary>
+            <remarks>行李實際裝載行搬</remarks>
+        </member>
+        <member name="M:BPMWebConsole.Models.DAO.BPMLast.#ctor(System.Data.IDbConnection)">
+            <summary>
+            建構子
+            </summary>
+            <param name="pConn">資料庫連接物件</param>
+        </member>
+        <member name="M:BPMWebConsole.Models.DAO.BPMLast.FetchRecord(System.Data.IDataReader)">
+            <summary>
+            擷取一列資料表記錄
+            </summary>
+            <param name="pRs"><c>IDataReader</c>資料擷取物件</param>
+            <returns>一列資料表記錄</returns>
+        </member>
+        <member name="M:BPMWebConsole.Models.DAO.BPMLast.SetRecord(System.String,System.Object)">
+            <summary>
+            新增一列資料表記錄之對應值
+            </summary>
+            <param name="pSqlStr">"INSERT INTO" SQL指令</param>
+            <param name="pObj">單筆資料列物件</param>
+            <returns>指令執行狀態</returns>
+        </member>
+        <member name="M:BPMWebConsole.Models.DAO.BPMLast.SetField(System.String)">
+            <summary>
+            設定資料表建立所需之欄位與資料型態
+            </summary>
+            <param name="pSqlStr">"CREATE TABLE" SQL指令</param>
+            <returns>指令執行狀態</returns>
+        </member>
+        <member name="M:BPMWebConsole.Models.DAO.BPMLast.SelectByDate(System.String)">
+            <summary>
+            依據[BSM_FLIGHT]、[BSM_DATE]篩選[dbo.BPM_LAST]資料表，[BSM_FLIGHT]包含航空公司代碼
+            </summary>
+            <param name="pDate">行李所屬航班之作業日期</param>
+            <returns>
+            <para> 0: 依條件搜尋的筆數</para>
+            <para>-1: 例外錯誤</para>
+            </returns>
+            <remarks>使用"<c>RecordList</c>"取出所查詢的資料列</remarks>
+        </member>
+        <member name="M:BPMWebConsole.Models.DAO.BPMLast.SelectByKey(System.String,System.String)">
+            <summary>
+            依據[BAG_TAG], [BSM_DATE]篩選[dbo.BPM_LAST]資料表
+            </summary>
+            <param name="pBagTag">行李條碼編號</param>
+            <param name="pDate">行李所屬航班之作業日期</param>
+            <returns>
+            <para> 0: 依條件搜尋的筆數</para>
+            <para>-1: 例外錯誤</para>
+            </returns>
+            <remarks>使用"<c>RecordList</c>"取出所查詢的資料列</remarks>
+        </member>
+        <member name="M:BPMWebConsole.Models.DAO.BPMLast.Update(System.Object)">
+            <summary>
+            更新一筆資料表記錄
+            </summary>
+            <param name="pObj">單筆資料列物件</param>
+            <returns>"UPDATE SET" SQL指令執行狀態</returns>
+        </member>
+        <member name="T:BPMWebConsole.Models.DAO.BPMLog">
+            <summary>
+            "BPM_LOGXX"資料表類別
+            </summary>
+            <remarks>XX表示月份</remarks>
+        </member>
+        <member name="T:BPMWebConsole.Models.DAO.BPMLog.Row">
+            <summary>
+            資料表欄位物件
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.BPMLog.Row.BSM_DATE">
+            <summary>
+            行李所屬航班之作業日期，格式為yyyyMMdd
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.BPMLog.Row.BAG_TAG">
+            <summary>
+            行李條碼編號
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.BPMLog.Row.BSM_STATE">
+            <summary>
+            行李處理狀態
+            </summary>
+            <remarks>
+            <para>0: 刪除</para>
+            <para>1: 新增</para>
+            <para>2: 更新</para>
+            </remarks>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.BPMLog.Row.BAG_STATE">
+            <summary>
+            行李裝載狀態
+            </summary>
+            <remarks>
+            <para> 0: 新增</para>
+            <para>10: 裝櫃</para>
+            <para>11: 卸載</para>
+            </remarks>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.BPMLog.Row.AUTH_LOAD">
+            <summary>
+            行李裝載許可
+            </summary>
+            <remarks>
+            <para>Y: 允許</para>
+            <para>N: 不允許</para>
+            </remarks>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.BPMLog.Row.AUTH_TRANSPORT">
+            <summary>
+            行李運送許可
+            </summary>
+            <remarks>
+            <para>Y: 允許</para>
+            <para>N: 不允許</para>
+            </remarks>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.BPMLog.Row.BSM_SOURCE">
+            <summary>
+            行李BSM訊息字串
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.BPMLog.Row.BPM_SOURCE">
+            <summary>
+            行李BPM訊息字串(裝、卸載)
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.BPMLog.Row.UPD_TIME">
+            <summary>
+            資料列變動時間，格式為yyyyMMddHHmmss
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.BPMLog.Row.BSM_FLIGHT">
+            <summary>
+            行李所屬航班編號
+            </summary>
+            <remarks>行李應裝載行搬</remarks>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.BPMLog.Row.BAG_FLIGHT">
+            <summary>
+            行李裝載航班編號
+            </summary>
+            <remarks>行李實際裝載行搬</remarks>
+        </member>
+        <member name="M:BPMWebConsole.Models.DAO.BPMLog.#ctor(System.Data.IDbConnection)">
+            <summary>
+            建構子
+            </summary>
+            <param name="pConn">資料庫連接物件</param>
+        </member>
+        <member name="M:BPMWebConsole.Models.DAO.BPMLog.FetchRecord(System.Data.IDataReader)">
+            <summary>
+            擷取一列資料表記錄
+            </summary>
+            <param name="pRs"><c>IDataReader</c>資料擷取物件</param>
+            <returns>一列資料表記錄</returns>
+        </member>
+        <member name="M:BPMWebConsole.Models.DAO.BPMLog.SetRecord(System.String,System.Object)">
+            <summary>
+            新增一列資料表記錄之對應值
+            </summary>
+            <param name="pSqlStr">"INSERT INTO" SQL指令</param>
+            <param name="pObj">單筆資料列物件</param>
+            <returns>指令執行狀態</returns>
+        </member>
+        <member name="M:BPMWebConsole.Models.DAO.BPMLog.SetField(System.String)">
+            <summary>
+            設定資料表建立所需之欄位與資料型態
+            </summary>
+            <param name="pSqlStr">"CREATE TABLE" SQL指令</param>
+            <returns>指令執行狀態</returns>
+        </member>
+        <member name="M:BPMWebConsole.Models.DAO.BPMLog.SelectByKey(System.String,System.String)">
+            <summary>
+            依據[BAG_TAG], [BSM_DATE]篩選[dbo.BPM_LOGXX]資料表
+            </summary>
+            <param name="pBagTag">行李條碼編號</param>
+            <param name="pDate">行李所屬航班之作業日期</param>
+            <returns>
+            <para> 0: 依條件搜尋的筆數</para>
+            <para>-1: 例外錯誤</para>
+            </returns>
+            <remarks>使用"<c>RecordList</c>"取出所查詢的資料列</remarks>
+        </member>
+        <member name="M:BPMWebConsole.Models.DAO.BPMLog.SelectByCostom(System.String,System.String,System.String)">
+            <summary>
+            依據[BSM_DATE], [BSM_FLIGHT]篩選[dbo.BPM_LOGXX]資料表，[BSM_FLIGHT]包含指定的航空公司代碼
+            </summary>
+            <param name="pDate1">行李所屬航班之作業日期(查詢起始)</param>
+            <param name="pDate2">行李所屬航班之作業日期(查詢結束)</param>
+            <param name="pAirline">航空公司代碼(IATA)</param>
+            <returns>
+            <para> 0: 依條件搜尋的筆數</para>
+            <para>-1: 例外錯誤</para>
+            </returns>
+            <remarks>使用"<c>RecordList</c>"取出所查詢的資料列</remarks>
+        </member>
+        <member name="M:BPMWebConsole.Models.DAO.BPMLog.Update(System.Object)">
+            <summary>
+            更新一筆資料表記錄
+            </summary>
+            <param name="pObj">單筆資料列物件</param>
+            <returns>"UPDATE SET" SQL指令執行狀態</returns>
+        </member>
+        <member name="T:BPMWebConsole.Models.DAO.DCSConf">
+            <summary>
+            "DCS_CONF"資料表類別
+            </summary>
+        </member>
+        <member name="T:BPMWebConsole.Models.DAO.DCSConf.Row">
+            <summary>
+            資料表欄位物件
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.DCSConf.Row.DCS_ID">
+            <summary>
+            航空公司代碼，使用IATA格式
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.DCSConf.Row.IP_ADDR">
+            <summary>
+            航空公司MQ伺服器IP位址
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.DCSConf.Row.QUEUE_NAME">
+            <summary>
+            航空公司MQ之佇列名稱
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.DCSConf.Row.BROKER">
+            <summary>
+            與航空公司MQ伺服器連線處理之佇列管理程式名稱
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.DCSConf.Row.IN_USE">
+            <summary>
+            此航空公司佇列是否為使用中
+            </summary>
+            <remarks>
+            <para>Y: 使用</para>
+            <para>N: 不使用</para>
+            </remarks>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.DCSConf.Row.REMARK">
+            <summary>
+            註解
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.DCSConf.Row.UPD_USER">
+            <summary>
+            資料列修改人員
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.DCSConf.Row.UPD_TIME">
+            <summary>
+            資料列變動時間，格式為yyyyMMddHHmmss
+            </summary>
+        </member>
+        <member name="M:BPMWebConsole.Models.DAO.DCSConf.#ctor(System.Data.IDbConnection)">
+            <summary>
+            建構子
+            </summary>
+            <param name="pConn">資料庫連接物件</param>
+        </member>
+        <member name="M:BPMWebConsole.Models.DAO.DCSConf.FetchRecord(System.Data.IDataReader)">
+            <summary>
+            擷取一列資料表記錄
+            </summary>
+            <param name="pRs"><c>IDataReader</c>資料擷取物件</param>
+            <returns>一列資料表記錄</returns>
+        </member>
+        <member name="M:BPMWebConsole.Models.DAO.DCSConf.SetRecord(System.String,System.Object)">
+            <summary>
+            新增一列資料表記錄之對應值
+            </summary>
+            <param name="pSqlStr">"INSERT INTO" SQL指令</param>
+            <param name="pObj">單筆資料列物件</param>
+            <returns>指令執行狀態</returns>
+        </member>
+        <member name="M:BPMWebConsole.Models.DAO.DCSConf.SetField(System.String)">
+            <summary>
+            設定資料表建立所需之欄位與資料型態
+            </summary>
+            <param name="pSqlStr">"CREATE TABLE" SQL指令</param>
+            <returns>指令執行狀態</returns>
+        </member>
+        <member name="M:BPMWebConsole.Models.DAO.DCSConf.SelectByKey(System.String,System.String)">
+            <summary>
+            依據[DCS_ID], [QUEUE_NAME]篩選[dbo.DCS_CONF]資料表
+            </summary>
+            <param name="pDcsID">航空公司代碼</param>
+            <param name="pQName">航空公司MQ之佇列名稱</param>
+            <returns>
+            <para> 0: 依條件搜尋的筆數</para>
+            <para>-1: 例外錯誤</para>
+            </returns>
+            <remarks>使用"<c>RecordList</c>"取出所查詢的資料列</remarks>
+        </member>
+        <member name="M:BPMWebConsole.Models.DAO.DCSConf.SelectFromTable">
+            <summary>
+            篩選全部[dbo.DCS_CONF]資料表
+            </summary>
+            <returns>
+            <para> 0: 依條件搜尋的筆數</para>
+            <para>-1: 例外錯誤</para>
+            </returns>
+            <remarks>使用"<c>RecordList</c>"取出所查詢的資料列</remarks>
+        </member>
+        <member name="M:BPMWebConsole.Models.DAO.DCSConf.Update(System.Object)">
+            <summary>
+            更新一筆資料表記錄
+            </summary>
+            <param name="pObj">單筆資料列物件</param>
+            <returns>"UPDATE SET" SQL指令執行狀態</returns>
+        </member>
+        <member name="T:BPMWebConsole.Models.DAO.ProcStatus">
+            <summary>
+            "PROC_STATUS"資料表類別
+            </summary>
+        </member>
+        <member name="T:BPMWebConsole.Models.DAO.ProcStatus.Row">
+            <summary>
+            資料表欄位物件
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.ProcStatus.Row.PROC_ID">
+            <summary>
+            BPM Server執行程序名稱
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.ProcStatus.Row.SERVER_ID">
+            <summary>
+            各執行程序所屬伺服器名稱
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.ProcStatus.Row.DATE_TIME">
+            <summary>
+            資料列變動時間，格式為yyyyMMddHHmmss
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.DAO.ProcStatus.Row.STATUS">
+            <summary>
+            各執行程序運作狀態
+            </summary>
+            <remarks>
+            <para>not 1: 非執行中</para>
+            <para>1: 執行中</para>
+            </remarks>
+        </member>
+        <member name="M:BPMWebConsole.Models.DAO.ProcStatus.#ctor(System.Data.IDbConnection)">
+            <summary>
+            建構子
+            </summary>
+            <param name="pConn">資料庫連接物件</param>
+        </member>
+        <member name="M:BPMWebConsole.Models.DAO.ProcStatus.FetchRecord(System.Data.IDataReader)">
+            <summary>
+            擷取一列資料表記錄
+            </summary>
+            <param name="pRs"><c>IDataReader</c>資料擷取物件</param>
+            <returns>一列資料表記錄</returns>
+        </member>
+        <member name="M:BPMWebConsole.Models.DAO.ProcStatus.SetRecord(System.String,System.Object)">
+            <summary>
+            新增一列資料表記錄之對應值
+            </summary>
+            <param name="pSqlStr">"INSERT INTO" SQL指令</param>
+            <param name="pObj">單筆資料列物件</param>
+            <returns>指令執行狀態</returns>
+        </member>
+        <member name="M:BPMWebConsole.Models.DAO.ProcStatus.SetField(System.String)">
+            <summary>
+            設定資料表建立所需之欄位與資料型態
+            </summary>
+            <param name="pSqlStr">"CREATE TABLE" SQL指令</param>
+            <returns>指令執行狀態</returns>
+        </member>
+        <member name="M:BPMWebConsole.Models.DAO.ProcStatus.SelectByKey(System.String,System.String)">
+            <summary>
+            依據[PROC_ID], [SERVER_ID]篩選[dbo.PROC_STATUS]資料表
+            </summary>
+            <param name="pProcID">BPM Server執行程序名稱</param>
+            <param name="pServerID">各執行程序所屬伺服器名稱</param>
+            <returns>
+            <para> 0: 依條件搜尋的筆數</para>
+            <para>-1: 例外錯誤</para>
+            </returns>
+            <remarks>使用"<c>RecordList</c>"取出所查詢的資料列</remarks>
+        </member>
+        <member name="M:BPMWebConsole.Models.DAO.ProcStatus.SelectFromTable">
+            <summary>
+            篩選全部[dbo.PROC_STATUS]資料表
+            </summary>
+            <returns>
+            <para> 0: 依條件搜尋的筆數</para>
+            <para>-1: 例外錯誤</para>
+            </returns>
+            <remarks>使用"<c>RecordList</c>"取出所查詢的資料列</remarks>
+        </member>
+        <member name="M:BPMWebConsole.Models.DAO.ProcStatus.Update(System.Object)">
+            <summary>
+            更新一筆資料表記錄
+            </summary>
+            <param name="pObj">單筆資料列物件</param>
+            <returns>"UPDATE SET" SQL指令執行狀態</returns>
+        </member>
+        <member name="M:BPMWebConsole.Models.Entities.ApplicationContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions)">
+            <summary>
+            建構子
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="T:BPMWebConsole.Models.Entities.Employee">
+            <summary>
+            測試用資料
+            </summary>
+        </member>
+        <member name="T:BPMWebConsole.Models.Entities.LocalizedIdentityErrorDescriber">
+            <summary>
+            <c>Identity</c> 錯誤說明類別
+            </summary>
+        </member>
+        <member name="M:BPMWebConsole.Models.Entities.LocalizedIdentityErrorDescriber.DuplicateEmail(System.String)">
+            <summary>
+            使用者資料 <c>Email</c> 已存在之錯誤說明
+            </summary>
+            <param name="email">Email位址</param>
+            <returns><see cref="T:Microsoft.AspNetCore.Identity.IdentityError"/> 錯誤說明物件</returns>
+        </member>
+        <member name="M:BPMWebConsole.Models.Entities.LocalizedIdentityErrorDescriber.DuplicateUserName(System.String)">
+            <summary>
+            使用者資料 <c>UserName</c> 已存在之錯誤說明
+            </summary>
+            <param name="userName">使用者名稱</param>
+            <returns><see cref="T:Microsoft.AspNetCore.Identity.IdentityError"/> 錯誤說明物件</returns>
+        </member>
+        <member name="M:BPMWebConsole.Models.Entities.LocalizedIdentityErrorDescriber.InvalidEmail(System.String)">
+            <summary>
+            使用者資料 <c>Email</c> 格式無效之錯誤說明
+            </summary>
+            <param name="email">Email位址</param>
+            <returns><see cref="T:Microsoft.AspNetCore.Identity.IdentityError"/> 錯誤說明物件</returns>
+        </member>
+        <member name="M:BPMWebConsole.Models.Entities.LocalizedIdentityErrorDescriber.InvalidUserName(System.String)">
+            <summary>
+            使用者資料 <c>UserName</c> 格式無效之錯誤說明
+            </summary>
+            <param name="userName">使用者名稱</param>
+            <returns><see cref="T:Microsoft.AspNetCore.Identity.IdentityError"/> 錯誤說明物件</returns>
+        </member>
+        <member name="T:BPMWebConsole.Models.Entities.User">
+            <summary>
+            使用者資料類別(繼承 <see cref="T:Microsoft.AspNetCore.Identity.IdentityUser"/> 之屬性資料)
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.Entities.User.FirstName">
+            <summary>
+            名字
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.Entities.User.LastName">
+            <summary>
+            姓氏
+            </summary>
+        </member>
+        <member name="T:BPMWebConsole.Models.Service.CaptchaService">
+            <summary>
+            登入用圖形驗證碼服務
+            </summary>
+        </member>
+        <member name="F:BPMWebConsole.Models.Service.CaptchaService._imageWidth">
+            <summary>
+            圖片寬度(px)
+            </summary>
+        </member>
+        <member name="F:BPMWebConsole.Models.Service.CaptchaService._imageHeight">
+            <summary>
+            圖片高度(px)
+            </summary>
+        </member>
+        <member name="F:BPMWebConsole.Models.Service.CaptchaService._textLightness">
+            <summary>
+            驗證碼字元亮度(0-240)
+            </summary>
+            <remarks>使用HSL色系，依Microsoft技術文件說明最大值為240</remarks>
+        </member>
+        <member name="F:BPMWebConsole.Models.Service.CaptchaService._interferenceLightness">
+            <summary>
+            干擾線亮度(0-240)
+            </summary>
+            <remarks>使用HSL色系，依Microsoft技術文件說明最大值為240</remarks>
+        </member>
+        <member name="F:BPMWebConsole.Models.Service.CaptchaService._chars">
+            <summary>
+            驗證碼隨機產生字元集
+            </summary>
+            <remarks>若混用大小寫英文與數字須避開"l1Oo0"等混淆字元</remarks>
+        </member>
+        <member name="F:BPMWebConsole.Models.Service.CaptchaService._random">
+            <summary>
+            亂數產生器
+            </summary>
+        </member>
+        <member name="F:BPMWebConsole.Models.Service.CaptchaService._bgColor">
+            <summary>
+            背景顏色(預設白色)
+            </summary>
+        </member>
+        <member name="F:BPMWebConsole.Models.Service.CaptchaService._fonts">
+            <summary>
+            隨機驗證碼字元之字體字型列表
+            </summary>
+        </member>
+        <member name="M:BPMWebConsole.Models.Service.CaptchaService.ComputeMd5Hash(System.String)">
+            <summary>
+            字串加密轉換(Md5 Hash)
+            </summary>
+            <param name="rawText">明碼</param>
+            <returns>密文</returns>
+        </member>
+        <member name="M:BPMWebConsole.Models.Service.CaptchaService.GenerateRandomText(System.Int32)">
+            <summary>
+            隨機產生驗證碼
+            </summary>
+            <param name="textLength">驗證碼字串長度</param>
+            <returns>隨機驗證碼字串</returns>
+        </member>
+        <member name="M:BPMWebConsole.Models.Service.CaptchaService.GenerateCaptchaImage(System.String)">
+            <summary>
+            依隨機驗證碼字串產生圖形驗證碼
+            </summary>
+            <param name="text">隨機驗證碼字串</param>
+            <returns>圖形驗證碼</returns>
+        </member>
+        <member name="M:BPMWebConsole.Models.Service.CaptchaService.DrawInterferenceLines(System.Drawing.Graphics@,System.Int32)">
+            <summary>
+            隨機繪出干擾線
+            </summary>
+            <param name="graphic">畫布</param>
+            <param name="lines">干擾線數量</param>
+        </member>
+        <member name="M:BPMWebConsole.Models.Service.CaptchaService.GetRandomColor(System.Int32)">
+            <summary>
+            隨機產生顏色值
+            </summary>
+            <param name="lightness">顏色亮度</param>
+            <returns>顏色物件</returns>
+        </member>
+        <member name="T:BPMWebConsole.Models.Service.CommStatusService">
+            <summary>
+            <c>CommStatus</c> 通訊連線狀態之資料服務
+            </summary>
+        </member>
+        <member name="F:BPMWebConsole.Models.Service.CommStatusService.BPMDB_ConnStr">
+            <summary>
+            BPMDB供此Web Application使用之資料庫連線參數
+            </summary>
+        </member>
+        <member name="F:BPMWebConsole.Models.Service.CommStatusService.Mode">
+            <summary>
+            此Web Application執行模式
+            </summary>
+            <remarks>
+            <para>0: 表示為測試模式</para>
+            <para>1: 表示為正式運行模式</para>
+            </remarks>
+        </member>
+        <member name="F:BPMWebConsole.Models.Service.CommStatusService.TestDate">
+            <summary>
+            此Web Application執行模式為測試模式時，所使用的測試日期，格式為"yyyy-MM-dd"
+            </summary>
+        </member>
+        <member name="M:BPMWebConsole.Models.Service.CommStatusService.GetCommStatus(BPMWebConsole.Models.Source.StatusType)">
+            <summary>
+            取得通訊連線狀態集合
+            </summary>
+            <param name="type">通訊連線運作狀態種類</param>
+            <returns><c>CommStatus</c> 通訊連線狀態列表</returns>
+        </member>
+        <member name="M:BPMWebConsole.Models.Service.CommStatusService.GetBPMServerProcStatus">
+            <summary>
+            取得BPM Server各程序之運作狀態
+            </summary>
+            <returns>BPM Server各程序之通訊連線狀態列表</returns>
+        </member>
+        <member name="M:BPMWebConsole.Models.Service.CommStatusService.GetAirlineMQStatus">
+            <summary>
+            取得Airline各MQ通訊之訊息接收狀態
+            </summary>
+            <returns>Airline各MQ通訊之訊息接收狀態列表</returns>
+        </member>
+        <member name="M:BPMWebConsole.Models.Service.CommStatusService.GetFakeCommStatusData">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:BPMWebConsole.Models.Service.ConfigurationService">
+            <summary>
+            提供資料表各項基本組態設定之資料服務
+            </summary>
+        </member>
+        <member name="F:BPMWebConsole.Models.Service.ConfigurationService.BPMDB_ConnStr">
+            <summary>
+            BPMDB供此Web Application使用之資料庫連線參數
+            </summary>
+        </member>
+        <member name="M:BPMWebConsole.Models.Service.ConfigurationService.GetAirlineCollectionDict">
+            <summary>
+            取得與BPM作MQ通訊之航空公司集合字典
+            </summary>
+            <returns>航空公司集合字典</returns>
+            <remarks>不重複(排除QUEUE_NAME開頭TAISNR)</remarks>
+        </member>
+        <member name="M:BPMWebConsole.Models.Service.ConfigurationService.GetAirlineCollectionList">
+            <summary>
+            取得與BPM作MQ通訊之航空公司集合列表
+            </summary>
+            <returns>航空公司集合列表</returns>
+            <remarks>不重複(排除QUEUE_NAME開頭TAISNR)</remarks>
+        </member>
+        <member name="M:BPMWebConsole.Models.Service.ConfigurationService.GetDCSConfList">
+            <summary>
+            取得航空公司組態設定列表
+            </summary>
+            <returns>航空公司組態設定列表</returns>
+        </member>
+        <member name="T:BPMWebConsole.Models.Service.StatisticsService">
+            <summary>
+            提供查詢統計資料之資料服務
+            </summary>
+        </member>
+        <member name="F:BPMWebConsole.Models.Service.StatisticsService.BPMDB_ConnStr">
+            <summary>
+            BPMDB供此Web Application使用之資料庫連線參數
+            </summary>
+        </member>
+        <member name="M:BPMWebConsole.Models.Service.StatisticsService.GetBPMProcCount(System.String,System.String,System.String)">
+            <summary>
+            依查詢條件取得BPM Server處理訊息之數量統計
+            </summary>
+            <param name="dateStart">查詢起始日期</param>
+            <param name="dateEnd">查詢結束日期</param>
+            <param name="airline">航空公司代碼(IATA)</param>
+            <returns>BPM Server處理訊息之數量統計列表</returns>
+        </member>
+        <member name="T:BPMWebConsole.Models.Source.AirlineProperty">
+            <summary>
+            與BPM Server作MQ通訊之航空公司屬性資料類別
+            </summary>
+            <remarks>包含航空公司代碼(IATA)、航空公司註記名稱(Remark)</remarks>
+        </member>
+        <member name="P:BPMWebConsole.Models.Source.AirlineProperty.IATA_Code">
+            <summary>
+            航空公司代碼(IATA)
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.Source.AirlineProperty.ICAO_Code">
+            <summary>
+            航空公司代碼(ICAO)
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.Source.AirlineProperty.Remark">
+            <summary>
+            航空公司註記名稱
+            </summary>
+        </member>
+        <member name="T:BPMWebConsole.Models.Source.BPMProcCount">
+            <summary>
+            BPM Server處理數量類別
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.Source.BPMProcCount.ProcDate">
+            <summary>
+            統記日期，格式為"yyyy/MM/dd"
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.Source.BPMProcCount.Airline">
+            <summary>
+            航空公司屬性資料類別
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.Source.BPMProcCount.Count">
+            <summary>
+            BPM之MQ訊息處理數量
+            </summary>
+        </member>
+        <member name="T:BPMWebConsole.Models.Source.StatusType">
+            <summary>
+            通訊連線運作狀態種類之列舉項目
+            </summary>
+        </member>
+        <member name="F:BPMWebConsole.Models.Source.StatusType.BPMServer">
+            <summary>
+            BPM Server各程序之運作狀態集合
+            </summary>
+        </member>
+        <member name="F:BPMWebConsole.Models.Source.StatusType.AirlineMQ">
+            <summary>
+            各航空公司MQ之連線處理狀態集合
+            </summary>
+        </member>
+        <member name="F:BPMWebConsole.Models.Source.StatusType.BRS2BPM">
+            <summary>
+            BRS2BPM程序之運作狀態集合
+            </summary>
+        </member>
+        <member name="T:BPMWebConsole.Models.Source.CommStatus">
+            <summary>
+            通訊連線之運作狀態類別
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.Source.CommStatus.Type">
+            <summary>
+            通訊連線運作狀態種類
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.Source.CommStatus.Name_Code">
+            <summary>
+            通訊連線對象或程序名稱(代號)
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.Source.CommStatus.Name_Desc">
+            <summary>
+            通訊連線對象或程序名稱(顯示)
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.Source.CommStatus.Status">
+            <summary>
+            通訊連線狀態
+            </summary>
+        </member>
+        <member name="T:BPMWebConsole.Models.Source.LoginProperty">
+            <summary>
+            使用者登入屬性資料類別
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.Source.LoginProperty.Account">
+            <summary>
+            使用者登入帳號
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.Source.LoginProperty.Password">
+            <summary>
+            使用者登入密碼
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.Source.LoginProperty.RememberMe">
+            <summary>
+            記住登入帳號對應的密碼
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.Source.LoginProperty.CaptchaString">
+            <summary>
+            圖形驗證碼字串
+            </summary>
+        </member>
+        <member name="T:BPMWebConsole.Models.ViewModels.ForgotPasswordModel">
+            <summary>
+            忘記密碼資料集合類別
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ViewModels.ForgotPasswordModel.Email">
+            <summary>
+            收件者Email位址
+            </summary>
+        </member>
+        <member name="T:BPMWebConsole.Models.ViewModels.LoginViewModel">
+            <summary>
+            登入頁面資料集合類別
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ViewModels.LoginViewModel.LoginProp">
+            <summary>
+            使用者登入屬性資料集合
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ViewModels.LoginViewModel.ReturnUrl">
+            <summary>
+            登入驗證成功後導向之頁面網址
+            </summary>
+        </member>
+        <member name="M:BPMWebConsole.Models.ViewModels.LoginViewModel.#ctor">
+            <summary>
+            建構子
+            </summary>
+        </member>
+        <member name="T:BPMWebConsole.Models.ViewModels.ResetPasswordModel">
+            <summary>
+            登入密碼重置操作資料之集合類別
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ViewModels.ResetPasswordModel.Password">
+            <summary>
+            重置之使用者登入密碼
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ViewModels.ResetPasswordModel.ConfirmPassword">
+            <summary>
+            再次確認重置之登入密碼
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ViewModels.ResetPasswordModel.Email">
+            <summary>
+            收件者Email位址
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ViewModels.ResetPasswordModel.Token">
+            <summary>
+            特定使用者有效重置密碼之操作代幣
+            </summary>
+        </member>
+        <member name="T:BPMWebConsole.Models.ViewModels.StatisticsViewModel">
+            <summary>
+            統計數量查詢頁面資料集合類別
+            </summary>
+        </member>
+        <member name="T:BPMWebConsole.Models.ViewModels.StatisticsViewModel.RegisterViewModel">
+            <summary>
+            統計數量查詢頁面表單資料類別
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ViewModels.StatisticsViewModel.RegisterViewModel.DateStart">
+            <summary>
+            資料查詢起始日期
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ViewModels.StatisticsViewModel.RegisterViewModel.DateEnd">
+            <summary>
+            資料查詢結束日期
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ViewModels.StatisticsViewModel.RegisterViewModel.Airline">
+            <summary>
+            下拉選單選擇之航空公司代碼(IATA)
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ViewModels.StatisticsViewModel.RegisterViewModel.Airlines">
+            <summary>
+            下拉選單航空公司集合
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ViewModels.StatisticsViewModel.RegisterViewModel.QueryStatus">
+            <summary>
+            資料查詢狀態
+            </summary>
+            <remarks>
+            <para> null: 初始狀態</para>
+            <para> 1: 查詢成功</para>
+            <para> 0: 已查詢無結果；已查詢有錯誤</para>
+            <para>-1: 查詢條件問題</para>
+            </remarks>
+        </member>
+        <member name="P:BPMWebConsole.Models.ViewModels.StatisticsViewModel.FormsModel">
+            <summary>
+            Form表單註冊資料集合
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ViewModels.StatisticsViewModel.TableModel">
+            <summary>
+            統計查詢資料集合(適用顯示結果之圖或表)
+            </summary>
+        </member>
+        <member name="M:BPMWebConsole.Models.ViewModels.StatisticsViewModel.#ctor">
+            <summary>
+            建構子
+            </summary>
+            <remarks>航空公司集合之選單用資料列表可能為null</remarks>
+        </member>
+        <member name="T:BPMWebConsole.Models.ViewModels.UserRegistrationModel">
+            <summary>
+            使用者註冊資料集合類別
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ViewModels.UserRegistrationModel.FirstName">
+            <summary>
+            名字
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ViewModels.UserRegistrationModel.LastName">
+            <summary>
+            姓氏
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ViewModels.UserRegistrationModel.Email">
+            <summary>
+            註冊電子郵件信箱
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ViewModels.UserRegistrationModel.Password">
+            <summary>
+            註冊之登入密碼
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.Models.ViewModels.UserRegistrationModel.ConfirmPassword">
+            <summary>
+            再次確認之登入密碼
+            </summary>
+        </member>
+        <member name="T:BPMWebConsole.TagHelpers.Common.TagHelperCutPaste">
+            <summary>
+            ASP腳本標籤小幫手剪貼參數類別
+            </summary>
+            <remarks>非同步剪貼</remarks>
+        </member>
+        <member name="F:BPMWebConsole.TagHelpers.Common.TagHelperCutPaste.ItemStorageKey">
+            <summary>
+            項目儲存金鑰
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.TagHelpers.Common.TagHelperCutPaste.CutPasteKey">
+            <summary>
+            腳本標籤剪貼對應之金鑰
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.TagHelpers.Common.TagHelperCutPaste.TagHelperContent">
+            <summary>
+            剪下之腳本標籤的內容
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.TagHelpers.Common.TagHelperCutPaste.Attributes">
+            <summary>
+            剪下之腳本的屬性集合列表
+            </summary>
+        </member>
+        <member name="T:BPMWebConsole.TagHelpers.TagHelperScriptCut">
+            <summary>
+            ASP腳本標籤"script"剪下處理類別
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.TagHelpers.TagHelperScriptCut.CutKey">
+            <summary>
+            腳本標籤剪下使用之金鑰
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.TagHelpers.TagHelperScriptCut.ViewContext">
+            <summary>
+            此剪下之腳本標籤的文本內容
+            </summary>
+        </member>
+        <member name="M:BPMWebConsole.TagHelpers.TagHelperScriptCut.ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)">
+            <summary>
+            非同步執行ASP腳本標籤功能
+            </summary>
+            <param name="context">ASP腳本標籤文本</param>
+            <param name="output">ASP腳本標籤文本(去除剪下屬性)</param>
+            <returns>處理結果</returns>
+        </member>
+        <member name="T:BPMWebConsole.TagHelpers.TagHelperScriptPaste">
+            <summary>
+            ASP腳本標籤"script"貼上處理類別
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.TagHelpers.TagHelperScriptPaste.DeferDestinationId">
+            <summary>
+            目標貼上之腳本標籤金鑰
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.TagHelpers.TagHelperScriptPaste.ViewContext">
+            <summary>
+            此貼上之腳本標籤的文本內容
+            </summary>
+        </member>
+        <member name="P:BPMWebConsole.TagHelpers.TagHelperScriptPaste.Generator">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:BPMWebConsole.TagHelpers.TagHelperScriptPaste.#ctor(Microsoft.AspNetCore.Mvc.ViewFeatures.IHtmlGenerator)">
+            <summary>
+            建構子
+            </summary>
+            <param name="generator"></param>
+        </member>
+        <member name="M:BPMWebConsole.TagHelpers.TagHelperScriptPaste.ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)">
+            <summary>
+            非同步執行ASP腳本標籤功能
+            </summary>
+            <param name="context">ASP腳本標籤文本</param>
+            <param name="output">ASP腳本標籤文本(包含貼上屬性)</param>
+            <returns>處理結果</returns>
+        </member>
+        <member name="T:BPMWebConsole.ViewComponents.BPMProcCountViewComponent">
+            <summary>
+            ViewComponent for "Statistics/BPMProcCount.cshtml"
+            </summary>
+        </member>
+        <member name="M:BPMWebConsole.ViewComponents.BPMProcCountViewComponent.Invoke(System.Collections.Generic.List{BPMWebConsole.Models.Source.BPMProcCount})">
+            <summary>
+            注入 <c>BPMProcCount</c> BPM Server處理數量之長條圖取得服務
+            </summary>
+            <param name="counts">BPM Server處理數量統計列表</param>
+            <returns>BPM Server處理數量之長條圖(View Component)</returns>
+        </member>
+        <member name="T:BPMWebConsole.ViewComponents.CommStatusViewComponent">
+            <summary>
+            ViewComponent for "Dashboard/CommStatus.cshtml"
+            </summary>
+        </member>
+        <member name="M:BPMWebConsole.ViewComponents.CommStatusViewComponent.InvokeAsync(BPMWebConsole.Models.Source.StatusType)">
+            <summary>
+            注入 <c>CommStatus</c> 通訊連線狀態之資料取得服務
+            </summary>
+            <param name="type">通訊連線運作狀態種類</param>
+            <returns>通訊連線狀態參數清單(View Component)</returns>
+        </member>
+    </members>
+</doc>

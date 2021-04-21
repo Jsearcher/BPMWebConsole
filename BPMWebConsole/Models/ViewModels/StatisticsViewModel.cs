@@ -22,18 +22,21 @@ namespace BPMWebConsole.Models.ViewModels
             /// <summary>
             /// 資料查詢起始日期
             /// </summary>
+            [Required]
             [DataType(DataType.Date)]
             public DateTime DateStart { get; set; }
 
             /// <summary>
             /// 資料查詢結束日期
             /// </summary>
+            [Required]
             [DataType(DataType.Date)]
             public DateTime DateEnd { get; set; }
 
             /// <summary>
             /// 下拉選單選擇之航空公司代碼(IATA)
             /// </summary>
+            [Required]
             public string Airline { get; set; }
 
             /// <summary>

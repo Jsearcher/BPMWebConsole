@@ -14,12 +14,13 @@
 
 .result_container {
     /*margin-top: 5vh;*/
+    position: relative;
     overflow: hidden;
     outline: 1px solid #ff0000;
 }
 
     .result_container .table_container {
-        float: left;
+        display: inline-block;
         width: 40%;
         outline: 1px solid #00ff00;
     }
@@ -53,10 +54,15 @@
                         }
 
     .result_container .graphic_container {
-        float: left;
+        position: absolute;
+        display: inline-block;
         width: 60%;
-        height: 50px;
+        bottom: 0px;
         outline: 1px solid #0000ff;
+    }
+
+    .result_container .graphic_container .bar_chart_area {
+        height: 60vh;
     }
 
 @media screen and (max-width: 1707px) {

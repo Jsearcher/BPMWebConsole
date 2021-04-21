@@ -2,7 +2,7 @@
     ViewData["Title"] = "Statistics";
 }
 
-@model                         BPMWebConsole.Models.ViewModels.StatisticsViewModel
+@model BPMWebConsole.Models.ViewModels.StatisticsViewModel
 
 @section styles {
     <link rel="stylesheet" href="~/css/_SettingControl.css" />
@@ -12,13 +12,14 @@
 
 @section scripts {
     <script src="~/js/Statistics.js"></script>
+    <script asp-paste-key="BPMProcCountKey"></script>
 }
 
 @Html.HiddenFor(x => x.FormsModel.QueryStatus)
 
 <div class="setting_container">
     <div class="main_row">
-        <form class="query_form" method="post">
+        <form class="query_form" method="post" asp-controller="Statistics" asp-action="QueryBPMResult">
             <div class="condition_area">
                 <div class="calendar_date">
                     <span>選擇日期 起</span>
@@ -32,7 +33,7 @@
                 </div>
             </div>
             <div class="submit_area">
-                <button class="button search" id="search_btn" type="submit" asp-controller="Statistics" asp-action="QueryBPMResult">
+                <button class="button search" id="search_btn" type="submit">
                     <i class="fas fa-search"></i>
                 </button>
             </div>

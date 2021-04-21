@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Login";
+    Layout = "_LayoutAccount";
+}
+
+@model BPMWebConsole.Models.ViewModels.LoginViewModel
+
+@section styles {
+    <link rel="stylesheet" href="~/css/Login.css" />
+}
+
+@section scripts {
+    <script src="~/js/Login.js"></script>
+}
+
+<div class="title">
+    Login<br />
+    登入入口
+</div>
+<form class="login_form" id="login_form" method="post" asp-controller="Account" asp-action="UserLogin" asp-route-returnUrl="@Model.ReturnUrl">
+    <div class="text-danger login_message" asp-validation-summary="ModelOnly"></div>
+    <div class="condition_area">
+        <div class="login_input inner-addon left-addon">
+            <i class="fa fa-user fa-1x glyphicon"></i>
+            <input class="form-control" type="text" placeholder="帳號(Email)" asp-for="LoginProp.Account" asp-short-name="true" />
+        </div>
+        <div class="login_input inner-addon left-addon">
+            <i class="fa fa-lock fa-1x glyphicon"></i>
+            <input class="form-control" type="password" placeholder="密碼" asp-for="LoginProp.Password" asp-short-name="true" />
+        </div>
+        <div class="login_input form-check login_fixed_line">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="LoginProp.RememberMe" asp-short-name="true" /> @Html.DisplayNameFor(model => model.LoginProp.RememberMe)
+            </label>
+        </div>
+        <div class="login_input login_fixed_line">
+            <img id="captcha_img" src="@Url.Action("GetRndCaptcha")" alt="圖形驗證碼" title="點擊圖片更新驗證碼" asp-append-version="true" />
+            <input class="form-control captcha_input" type="text" asp-for="LoginProp.CaptchaString" asp-short-name="true" />
+        </div>
+    </div>
+    <div class="submit_area">
+        <button class="button login" id="submit_btn" type="submit">登入</button>
+    </div>
+</form>
+<div class="account_action">
+    <a asp-controller="Account" asp-action="Register">帳號註冊</a>
+    <a asp-controller="Account" asp-action="ForgotPassword">忘記密碼</a>
+</div>

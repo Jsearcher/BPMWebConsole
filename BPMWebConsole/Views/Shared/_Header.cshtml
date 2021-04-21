@@ -1,7 +1,12 @@
-﻿<header>
+﻿@using Microsoft.AspNetCore.Identity
+@using BPMWebConsole.Models.Entities
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+<header>
     <div class="header_left">
         <div class="airport_logo">
-            <img src="~/image/airport.png" alt="" />
+            <img src="~/image/airport.png" alt="Taoyuan Airport Logo" />
         </div>
         <div class="system_name">
             桃園機場 BPM系統 訊息交換監視
@@ -12,18 +17,33 @@
             <div class="date_count" id="date_count">2020/01/22</div>
             <div class="time_count" id="time_count">14:40:35</div>
         </div>
-        <div class="login_area">
-            <div class="login_name">
-                <i class="fa fa-user fa-lg"></i>
-                <span>使用者名稱</span>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <div class="login_area">
+                <div class="login_name">
+                    <i class="fa fa-user fa-lg"></i>
+                    <span>@User.FindFirst("FullName").Value</span>
+                </div>
             </div>
-        </div>
-        <div class="login_area">
-            <div class="logout">
-                <i class="fa fa-sign-out-alt fa-lg"></i>
-                <span>登出</span>
+            <div class="login_area">
+                <form class="logout_form" method="post" asp-controller="Account" asp-action="Logout">
+                    <button class="button logout" id="submit_btn" type="submit">
+                        <i class="fa fa-sign-out-alt fa-lg"></i>
+                        <span>登出</span>
+                    </button>
+                </form>
             </div>
-        </div>
+        }
+        else
+        {
+            <div class="login_area">
+                <div class="login_name">
+                    <i class="fa fa-user fa-lg"></i>
+                    <span>未登入使用者</span>
+                </div>
+            </div>
+        }
+
         <button id="autoClick" style="display: none" />
     </div>
     @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">

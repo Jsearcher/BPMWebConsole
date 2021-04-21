@@ -70,6 +70,9 @@ namespace BPMWebConsole.TagHelpers
                 Attributes = context.AllAttributes.Where(x => x.Name != "asp-cut-key").ToList() // Pass the attributes
             });
 
+            // Disable this tag
+            output.TagName = "!script";
+
             // Do not render content in this section
             output.Content.Clear();
             return;

@@ -20,7 +20,7 @@ namespace BPMWebConsole.Models.Service
         /// <summary>
         /// BPMDB供此Web Application使用之資料庫連線參數
         /// </summary>
-        private static readonly string BPMDB_ConnStr = WebConfig.WebPropertySetting.Instance().ConfigRoot.properties.WebPropSetting.DBServer.BPMDB;
+        private static readonly string BPMDB_ConnStr = WebConfig.WebPropertySetting.Instance().DBServer.BPMDB;
 
         /// <summary>
         /// 此Web Application執行模式
@@ -29,11 +29,11 @@ namespace BPMWebConsole.Models.Service
         /// <para>0: 表示為測試模式</para>
         /// <para>1: 表示為正式運行模式</para>
         /// </remarks>
-        private static readonly int Mode = WebConfig.WebPropertySetting.Instance().ConfigRoot.properties.WebPropSetting.Basic.Mode;
+        private static readonly int Mode = WebConfig.WebPropertySetting.Instance().Basic.Mode;
         /// <summary>
         /// 此Web Application執行模式為測試模式時，所使用的測試日期，格式為"yyyy-MM-dd"
         /// </summary>
-        private static readonly string TestDate = WebConfig.WebPropertySetting.Instance().ConfigRoot.properties.WebPropSetting.Basic.TestDate;
+        private static readonly string TestDate = WebConfig.WebPropertySetting.Instance().Basic.TestDate;
 
         #endregion
 
@@ -124,7 +124,7 @@ namespace BPMWebConsole.Models.Service
             List<CommStatus> RowList = new List<CommStatus>();
             List<BPMLast.Row> RowList_BPM = new List<BPMLast.Row>();
             Dictionary<string, string> AirlineDict = new ConfigurationService().GetAirlineCollectionDict();
-            string RemMQ = WebConfig.WebPropertySetting.Instance().ConfigRoot.properties.WebPropSetting.TempRecord.AirlineMQ;
+            string RemMQ = WebConfig.WebPropertySetting.Instance().TempRecord.AirlineMQ;
 
             try
             {
@@ -214,7 +214,7 @@ namespace BPMWebConsole.Models.Service
                             RemMQ += string.Format(";{0}:{1}", rMQ.Key, rMQ.Value);
                         }
                     }
-                    WebConfig.WebPropertySetting.Instance().ConfigRoot.properties.WebPropSetting.TempRecord.AirlineMQ = RemMQ;
+                    WebConfig.WebPropertySetting.Instance().TempRecord.AirlineMQ = RemMQ;
                     InfoLog.Log("BPMWebConsole", "CommStatusService", "Update remaining AirlineMQ in web configuration successfully.");
                 }
                 else

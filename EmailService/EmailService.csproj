@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AssemblyName>ASI.ICT.EmailService</AssemblyName>
+    <AssemblyVersion>1.0</AssemblyVersion>
+    <FileVersion>1.0.0</FileVersion>
+    <Authors>KaiJyun Huang</Authors>
+    <Company>CTCI ASI</Company>
+    <Product>Email Service Library</Product>
+    <Description>This is an email service for sending email in ASP.NET Core application. There are methods to sync and async send email messages and to change the email body from the plain text to the pure HTML in this library.
+
+Revised log: 
+v1.0.0 - Initial Email Service
+
+The version definition follows the "Semantic Versioning 2.0.0". The format of versioning is shown below
+ - For Assembly Version: MAJOR.MINOR
+ - For Assembly File Version: MAJOR.MINOR.PATCH
+And the meaning of each indicator: 
+ - MAJOR version when you make incompatible API changes,
+ - MINOR version when you add functionality in a backwards compatible manner, and
+ - PATCH version when you make backwards compatible bug fixes.</Description>
+    <Copyright>Copyright © CTCI Advanced Systems Inc. 2021</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ASI.ICT.Lib.Log" Version="1.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.5" />
+    <PackageReference Include="NETCore.MailKit" Version="2.0.3" />
+  </ItemGroup>
+
+</Project>

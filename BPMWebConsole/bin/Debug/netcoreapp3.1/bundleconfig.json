@@ -1,0 +1,28 @@
+[
+    {
+        "outputFileName": "wwwroot/bundles/tooltip/tooltip-bundle.min.js",
+        "inputFiles": [
+            "wwwroot/lib/node_modules/@popperjs/core/dist/umd/popper.min.js",
+            "wwwroot/lib/node_modules/tippy.js/dist/tippy-bundle.umd.min.js"
+        ],
+        "minify": {
+            "enabled": true,
+            "renameLocals": true
+        },
+        "sourceMap": false
+    },
+    {
+        "outputFileName": "wwwroot/bundles/jquery/jquery-bundle.min.js",
+        "inputFiles": [
+            "wwwroot/lib/node_modules/jquery/dist/jquery.min.js",
+            "wwwroot/lib/node_modules/jquery-validation/dist/jquery.validate.min.js",
+            "wwwroot/lib/node_modules/jquery-validation/dist/localization/messages_zh_TW.min.js"
+            //"wwwroot/lib/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"
+        ],
+        "minify": {
+            "enabled": true,
+            "renameLocals": true
+        },
+        "sourceMap": false
+    }
+]

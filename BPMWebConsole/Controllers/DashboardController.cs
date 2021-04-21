@@ -1,4 +1,5 @@
 ﻿using BPMWebConsole.Models.Source;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BPMWebConsole.Controllers
@@ -13,6 +14,7 @@ namespace BPMWebConsole.Controllers
         /// 進入點頁面控制
         /// </summary>
         /// <returns>通訊連線狀態參數清單</returns>
+        [Authorize]
         [Route("Index.html")]
         public IActionResult Index()
         {
@@ -28,6 +30,7 @@ namespace BPMWebConsole.Controllers
         /// <para>3: <c>StatusType.BRS2BPM</c></para>
         /// </param>
         /// <returns>狀態之顯示元件</returns>
+        [Authorize]
         [HttpGet("GetCommStatusVC/{id:int}")]
         public IActionResult GetCommStatusVC(int id)
         {

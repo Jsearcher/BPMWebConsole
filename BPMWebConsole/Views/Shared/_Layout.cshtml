@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="zh-tw">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,14 +7,12 @@
     <link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="~/favicon_bpm.ico" />
 
     <!-- Add CSS style sheet -->
-    <link rel="stylesheet" href="~/lib/fontawesome-free-5.15.2-web/css/all.min.css" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/node_modules/@@fortawesome/fontawesome-free/css/all.min.css" />
+    <link rel="stylesheet" href="~/lib/node_modules/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/_Layout.css" />
     <link rel="stylesheet" href="~/css/_Header.css" />
     <link rel="stylesheet" href="~/css/_LeftMenu.css" />
     @RenderSection("styles", required: false)
-
-    @*<link rel="stylesheet" href="~/css/site.css" />*@
 </head>
 <body onload="DispComTime()">
     <partial name="_Header.cshtml" />
@@ -31,18 +29,13 @@
         </div>
     </div>
 
-    @*<footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - BPMWebConsole - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>*@
-    <!-- Add jQuery, Bootstrap tools and required JS files -->
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <bundle name="wwwroot/bundles/jquery/jquery-bundle.min.js"></bundle>
+    <bundle name="wwwroot/bundles/tooltip/tooltip-bundle.min.js"></bundle>
+    <script src="~/lib/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <script src="~/js/_Header.js"></script>
     <script src="~/js/_LeftMenu.js"></script>
     <script src="~/js/_MiscLib.js"></script>
+    <script src="~/js/_ValidatorSetting.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
