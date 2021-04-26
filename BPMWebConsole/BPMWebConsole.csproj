@@ -2972,9 +2972,6 @@ And the meaning of each indicator:
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ASI.ICT.Lib.DB" Version="1.0.0" />
-    <PackageReference Include="ASI.ICT.Lib.Log" Version="1.0.2" />
-    <PackageReference Include="ASI.ICT.Lib.Misc" Version="1.5.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
     <PackageReference Include="BundlerMinifier.TagHelpers" Version="3.2.449" />
@@ -2992,6 +2989,18 @@ And the meaning of each indicator:
 
   <ItemGroup>
     <ProjectReference Include="..\EmailService\EmailService.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ASI.ICT.Lib.DB">
+      <HintPath>..\..\..\Lib\DB\bin\Debug\netstandard2.0\ASI.ICT.Lib.DB.dll</HintPath>
+    </Reference>
+    <Reference Include="ASI.ICT.Lib.Log">
+      <HintPath>..\..\..\Lib\Log\bin\Debug\netstandard2.0\ASI.ICT.Lib.Log.dll</HintPath>
+    </Reference>
+    <Reference Include="ASI.ICT.Lib.Misc">
+      <HintPath>..\..\..\Lib\Misc\bin\Debug\netstandard2.0\ASI.ICT.Lib.Misc.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>

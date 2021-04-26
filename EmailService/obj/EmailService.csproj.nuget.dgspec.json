@@ -1,23 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\VS Code\\Webs\\BPMWebConsole\\EmailService\\EmailService.csproj": {}
+    "D:\\0P_VS Code\\Webs\\BPMWebConsole\\EmailService\\EmailService.csproj": {}
   },
   "projects": {
-    "D:\\VS Code\\Webs\\BPMWebConsole\\EmailService\\EmailService.csproj": {
+    "D:\\0P_VS Code\\Webs\\BPMWebConsole\\EmailService\\EmailService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\VS Code\\Webs\\BPMWebConsole\\EmailService\\EmailService.csproj",
+        "projectUniqueName": "D:\\0P_VS Code\\Webs\\BPMWebConsole\\EmailService\\EmailService.csproj",
         "projectName": "ASI.ICT.EmailService",
-        "projectPath": "D:\\VS Code\\Webs\\BPMWebConsole\\EmailService\\EmailService.csproj",
-        "packagesPath": "C:\\Users\\c8015\\.nuget\\packages\\",
-        "outputPath": "D:\\VS Code\\Webs\\BPMWebConsole\\EmailService\\obj\\",
+        "projectPath": "D:\\0P_VS Code\\Webs\\BPMWebConsole\\EmailService\\EmailService.csproj",
+        "packagesPath": "C:\\Users\\Jerry\\.nuget\\packages\\",
+        "outputPath": "D:\\0P_VS Code\\Webs\\BPMWebConsole\\EmailService\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\c8015\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Jerry\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -25,7 +27,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "http://192.168.11.22:8081/repository/ASIICT-Nuget-Group/": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,10 +45,6 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
-            "ASI.ICT.Lib.Log": {
-              "target": "Package",
-              "version": "[1.0.2, )"
-            },
             "Microsoft.AspNetCore.Http.Features": {
               "target": "Package",
               "version": "[5.0.5, )"

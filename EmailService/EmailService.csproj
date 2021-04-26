@@ -25,9 +25,14 @@ And the meaning of each indicator:
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ASI.ICT.Lib.Log" Version="1.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.5" />
     <PackageReference Include="NETCore.MailKit" Version="2.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ASI.ICT.Lib.Log">
+      <HintPath>..\..\..\Lib\Log\bin\Debug\netstandard2.0\ASI.ICT.Lib.Log.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
